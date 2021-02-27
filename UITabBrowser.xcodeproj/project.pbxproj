@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A9519BEA25EA26A700AAF25C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9519BE925EA26A700AAF25C /* AppDelegate.swift */; };
+		A9519BEC25EA26A700AAF25C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9519BEB25EA26A700AAF25C /* SceneDelegate.swift */; };
+		A9519BEE25EA26A700AAF25C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9519BED25EA26A700AAF25C /* ViewController.swift */; };
+		A9519BF125EA26A700AAF25C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9519BEF25EA26A700AAF25C /* Main.storyboard */; };
+		A9519BF425EA26A700AAF25C /* UITabBrowser.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9519BF225EA26A700AAF25C /* UITabBrowser.xcdatamodeld */; };
+		A9519BF625EA26A900AAF25C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9519BF525EA26A900AAF25C /* Assets.xcassets */; };
+		A9519BF925EA26A900AAF25C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9519BF725EA26A900AAF25C /* LaunchScreen.storyboard */; };
+		A9519C0425EA26A900AAF25C /* UITabBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9519C0325EA26A900AAF25C /* UITabBrowserTests.swift */; };
+		A9519C0F25EA26A900AAF25C /* UITabBrowserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9519C0E25EA26A900AAF25C /* UITabBrowserUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A9519C0025EA26A900AAF25C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9519BDE25EA26A700AAF25C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9519BE525EA26A700AAF25C;
+			remoteInfo = UITabBrowser;
+		};
+		A9519C0B25EA26A900AAF25C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A9519BDE25EA26A700AAF25C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A9519BE525EA26A700AAF25C;
+			remoteInfo = UITabBrowser;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A9519BE625EA26A700AAF25C /* UITabBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITabBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9519BE925EA26A700AAF25C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A9519BEB25EA26A700AAF25C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A9519BED25EA26A700AAF25C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A9519BF025EA26A700AAF25C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A9519BF325EA26A700AAF25C /* UITabBrowser.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UITabBrowser.xcdatamodel; sourceTree = "<group>"; };
+		A9519BF525EA26A900AAF25C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A9519BF825EA26A900AAF25C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A9519BFA25EA26A900AAF25C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9519BFF25EA26A900AAF25C /* UITabBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITabBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9519C0325EA26A900AAF25C /* UITabBrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBrowserTests.swift; sourceTree = "<group>"; };
+		A9519C0525EA26A900AAF25C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9519C0A25EA26A900AAF25C /* UITabBrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UITabBrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A9519C0E25EA26A900AAF25C /* UITabBrowserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBrowserUITests.swift; sourceTree = "<group>"; };
+		A9519C1025EA26A900AAF25C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A9519BE325EA26A700AAF25C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9519BFC25EA26A900AAF25C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9519C0725EA26A900AAF25C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A9519BDD25EA26A700AAF25C = {
+			isa = PBXGroup;
+			children = (
+				A9519BE825EA26A700AAF25C /* UITabBrowser */,
+				A9519C0225EA26A900AAF25C /* UITabBrowserTests */,
+				A9519C0D25EA26A900AAF25C /* UITabBrowserUITests */,
+				A9519BE725EA26A700AAF25C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A9519BE725EA26A700AAF25C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A9519BE625EA26A700AAF25C /* UITabBrowser.app */,
+				A9519BFF25EA26A900AAF25C /* UITabBrowserTests.xctest */,
+				A9519C0A25EA26A900AAF25C /* UITabBrowserUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A9519BE825EA26A700AAF25C /* UITabBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				A9519BE925EA26A700AAF25C /* AppDelegate.swift */,
+				A9519BEB25EA26A700AAF25C /* SceneDelegate.swift */,
+				A9519BED25EA26A700AAF25C /* ViewController.swift */,
+				A9519BEF25EA26A700AAF25C /* Main.storyboard */,
+				A9519BF525EA26A900AAF25C /* Assets.xcassets */,
+				A9519BF725EA26A900AAF25C /* LaunchScreen.storyboard */,
+				A9519BFA25EA26A900AAF25C /* Info.plist */,
+				A9519BF225EA26A700AAF25C /* UITabBrowser.xcdatamodeld */,
+			);
+			path = UITabBrowser;
+			sourceTree = "<group>";
+		};
+		A9519C0225EA26A900AAF25C /* UITabBrowserTests */ = {
+			isa = PBXGroup;
+			children = (
+				A9519C0325EA26A900AAF25C /* UITabBrowserTests.swift */,
+				A9519C0525EA26A900AAF25C /* Info.plist */,
+			);
+			path = UITabBrowserTests;
+			sourceTree = "<group>";
+		};
+		A9519C0D25EA26A900AAF25C /* UITabBrowserUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A9519C0E25EA26A900AAF25C /* UITabBrowserUITests.swift */,
+				A9519C1025EA26A900AAF25C /* Info.plist */,
+			);
+			path = UITabBrowserUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A9519BE525EA26A700AAF25C /* UITabBrowser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9519C1325EA26A900AAF25C /* Build configuration list for PBXNativeTarget "UITabBrowser" */;
+			buildPhases = (
+				A9519BE225EA26A700AAF25C /* Sources */,
+				A9519BE325EA26A700AAF25C /* Frameworks */,
+				A9519BE425EA26A700AAF25C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UITabBrowser;
+			productName = UITabBrowser;
+			productReference = A9519BE625EA26A700AAF25C /* UITabBrowser.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A9519BFE25EA26A900AAF25C /* UITabBrowserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9519C1625EA26A900AAF25C /* Build configuration list for PBXNativeTarget "UITabBrowserTests" */;
+			buildPhases = (
+				A9519BFB25EA26A900AAF25C /* Sources */,
+				A9519BFC25EA26A900AAF25C /* Frameworks */,
+				A9519BFD25EA26A900AAF25C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9519C0125EA26A900AAF25C /* PBXTargetDependency */,
+			);
+			name = UITabBrowserTests;
+			productName = UITabBrowserTests;
+			productReference = A9519BFF25EA26A900AAF25C /* UITabBrowserTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A9519C0925EA26A900AAF25C /* UITabBrowserUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9519C1925EA26A900AAF25C /* Build configuration list for PBXNativeTarget "UITabBrowserUITests" */;
+			buildPhases = (
+				A9519C0625EA26A900AAF25C /* Sources */,
+				A9519C0725EA26A900AAF25C /* Frameworks */,
+				A9519C0825EA26A900AAF25C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A9519C0C25EA26A900AAF25C /* PBXTargetDependency */,
+			);
+			name = UITabBrowserUITests;
+			productName = UITabBrowserUITests;
+			productReference = A9519C0A25EA26A900AAF25C /* UITabBrowserUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A9519BDE25EA26A700AAF25C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					A9519BE525EA26A700AAF25C = {
+						CreatedOnToolsVersion = 12.4;
+					};
+					A9519BFE25EA26A900AAF25C = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = A9519BE525EA26A700AAF25C;
+					};
+					A9519C0925EA26A900AAF25C = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = A9519BE525EA26A700AAF25C;
+					};
+				};
+			};
+			buildConfigurationList = A9519BE125EA26A700AAF25C /* Build configuration list for PBXProject "UITabBrowser" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A9519BDD25EA26A700AAF25C;
+			productRefGroup = A9519BE725EA26A700AAF25C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A9519BE525EA26A700AAF25C /* UITabBrowser */,
+				A9519BFE25EA26A900AAF25C /* UITabBrowserTests */,
+				A9519C0925EA26A900AAF25C /* UITabBrowserUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A9519BE425EA26A700AAF25C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9519BF925EA26A900AAF25C /* LaunchScreen.storyboard in Resources */,
+				A9519BF625EA26A900AAF25C /* Assets.xcassets in Resources */,
+				A9519BF125EA26A700AAF25C /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9519BFD25EA26A900AAF25C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9519C0825EA26A900AAF25C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A9519BE225EA26A700AAF25C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9519BEE25EA26A700AAF25C /* ViewController.swift in Sources */,
+				A9519BEA25EA26A700AAF25C /* AppDelegate.swift in Sources */,
+				A9519BF425EA26A700AAF25C /* UITabBrowser.xcdatamodeld in Sources */,
+				A9519BEC25EA26A700AAF25C /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9519BFB25EA26A900AAF25C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9519C0425EA26A900AAF25C /* UITabBrowserTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A9519C0625EA26A900AAF25C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9519C0F25EA26A900AAF25C /* UITabBrowserUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A9519C0125EA26A900AAF25C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9519BE525EA26A700AAF25C /* UITabBrowser */;
+			targetProxy = A9519C0025EA26A900AAF25C /* PBXContainerItemProxy */;
+		};
+		A9519C0C25EA26A900AAF25C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A9519BE525EA26A700AAF25C /* UITabBrowser */;
+			targetProxy = A9519C0B25EA26A900AAF25C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A9519BEF25EA26A700AAF25C /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9519BF025EA26A700AAF25C /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A9519BF725EA26A900AAF25C /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A9519BF825EA26A900AAF25C /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A9519C1125EA26A900AAF25C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A9519C1225EA26A900AAF25C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A9519C1425EA26A900AAF25C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = UITabBrowser/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A9519C1525EA26A900AAF25C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = UITabBrowser/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowser;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A9519C1725EA26A900AAF25C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = UITabBrowserTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UITabBrowser.app/UITabBrowser";
+			};
+			name = Debug;
+		};
+		A9519C1825EA26A900AAF25C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = UITabBrowserTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowserTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UITabBrowser.app/UITabBrowser";
+			};
+			name = Release;
+		};
+		A9519C1A25EA26A900AAF25C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = UITabBrowserUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowserUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = UITabBrowser;
+			};
+			name = Debug;
+		};
+		A9519C1B25EA26A900AAF25C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = UITabBrowserUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowserUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = UITabBrowser;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A9519BE125EA26A700AAF25C /* Build configuration list for PBXProject "UITabBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9519C1125EA26A900AAF25C /* Debug */,
+				A9519C1225EA26A900AAF25C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9519C1325EA26A900AAF25C /* Build configuration list for PBXNativeTarget "UITabBrowser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9519C1425EA26A900AAF25C /* Debug */,
+				A9519C1525EA26A900AAF25C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9519C1625EA26A900AAF25C /* Build configuration list for PBXNativeTarget "UITabBrowserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9519C1725EA26A900AAF25C /* Debug */,
+				A9519C1825EA26A900AAF25C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9519C1925EA26A900AAF25C /* Build configuration list for PBXNativeTarget "UITabBrowserUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A9519C1A25EA26A900AAF25C /* Debug */,
+				A9519C1B25EA26A900AAF25C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A9519BF225EA26A700AAF25C /* UITabBrowser.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A9519BF325EA26A700AAF25C /* UITabBrowser.xcdatamodel */,
+			);
+			currentVersion = A9519BF325EA26A700AAF25C /* UITabBrowser.xcdatamodel */;
+			path = UITabBrowser.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = A9519BDE25EA26A700AAF25C /* Project object */;
+}
