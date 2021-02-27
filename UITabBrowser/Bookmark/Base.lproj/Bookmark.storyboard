@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sOa-Xp-8da">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="o1g-FG-hwL">
+            <objects>
+                <navigationController toolbarHidden="NO" id="sOa-Xp-8da" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hHD-UL-Wmu">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5MJ-vm-1PG">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="2OA-6F-xqR" kind="relationship" relationship="rootViewController" id="D9B-to-cfy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RzO-aj-Aqy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3549" y="-168"/>
+        </scene>
+        <!--Bookmark View Controller-->
+        <scene sceneID="slr-rP-jZf">
+            <objects>
+                <viewController id="2OA-6F-xqR" customClass="BookmarkViewController" customModule="UITabBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jGY-SA-XEV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bhc-cH-0VE">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <connections>
+                                    <segue destination="Oky-HE-uE6" kind="embed" identifier="SearchResultsSegue" id="b3T-aF-KXP"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="kX8-20-Ha4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Bhc-cH-0VE" firstAttribute="leading" secondItem="kX8-20-Ha4" secondAttribute="leading" id="69J-HR-9kd"/>
+                            <constraint firstItem="Bhc-cH-0VE" firstAttribute="top" secondItem="kX8-20-Ha4" secondAttribute="top" id="8nK-7C-de3"/>
+                            <constraint firstItem="kX8-20-Ha4" firstAttribute="trailing" secondItem="Bhc-cH-0VE" secondAttribute="trailing" id="HVj-zo-VeA"/>
+                            <constraint firstItem="kX8-20-Ha4" firstAttribute="bottom" secondItem="Bhc-cH-0VE" secondAttribute="bottom" id="XTa-rj-exa"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Delete All" id="XTC-ab-CEQ">
+                            <connections>
+                                <action selector="comfirmDeleteAll:" destination="2OA-6F-xqR" id="ueV-9u-zDW"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="H5f-w8-DFo"/>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="b5y-m3-4xp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="e0i-r2-RWd">
+                            <connections>
+                                <action selector="close:" destination="2OA-6F-xqR" id="1YV-dZ-0f8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="deleteAllButton" destination="XTC-ab-CEQ" id="R8l-56-G1Z"/>
+                        <outlet property="doneButton" destination="e0i-r2-RWd" id="d4B-Pm-Ewl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KQp-vO-O0r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2650.7246376811595" y="-168.08035714285714"/>
+        </scene>
+        <!--SearchResults-->
+        <scene sceneID="fLm-eG-aD4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SearchResults" id="Oky-HE-uE6" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fqt-AK-byL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1951" y="-168"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

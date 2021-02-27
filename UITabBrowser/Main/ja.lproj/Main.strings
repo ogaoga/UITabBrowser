@@ -1,0 +1,12 @@
+
+/* Class = "UIBarButtonItem"; title = "Close Button"; ObjectID = "FJK-cG-cbw"; */
+"FJK-cG-cbw.title" = "閉じる";
+
+/* Class = "UIBarButtonItem"; title = "Add Tab"; ObjectID = "kCR-Wc-YOS"; */
+"kCR-Wc-YOS.title" = "検索";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "px7-SX-IwR"; */
+"px7-SX-IwR.title" = "戻る";
+
+/* Class = "UIBarButtonItem"; title = "Forward Button"; ObjectID = "rPH-E0-u2E"; */
+"rPH-E0-u2E.title" = "進む";

@@ -1,0 +1,46 @@
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "2Gl-fZ-pa4"; */
+"2Gl-fZ-pa4.text" = "URL";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "5IV-95-yUG"; */
+"5IV-95-yUG.text" = "検索エンジン";
+
+/* Class = "UITableViewSection"; headerTitle = "About relief"; ObjectID = "ANe-At-nRt"; */
+"ANe-At-nRt.headerTitle" = "relief について";
+
+/* Class = "UILabel"; text = "Source Code on GitHub"; ObjectID = "BXX-G3-UWG"; */
+"BXX-G3-UWG.text" = "ソースコード（GitHub）";
+
+/* Class = "UILabel"; text = "Feedback Form"; ObjectID = "EnI-ec-hgo"; */
+"EnI-ec-hgo.text" = "フィードバック";
+
+/* Class = "UITableViewSection"; headerTitle = "Feedback"; ObjectID = "RQS-aN-DZv"; */
+"RQS-aN-DZv.headerTitle" = "フィードバック";
+
+/* Class = "UILabel"; text = "Search Engine"; ObjectID = "e65-N4-iW9"; */
+"e65-N4-iW9.text" = "検索エンジン";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "eIg-i4-mht"; */
+"eIg-i4-mht.text" = "検索エンジン名";
+
+/* Class = "UINavigationItem"; title = "Search Engine"; ObjectID = "eXT-IZ-ke5"; */
+"eXT-IZ-ke5.title" = "検索エンジン";
+
+/* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "nfh-4H-H8G"; */
+"nfh-4H-H8G.text" = "プライバシーポリシー";
+
+/* Class = "UILabel"; text = "Twitter (@relief_browser)"; ObjectID = "rCs-J9-3dQ"; */
+"rCs-J9-3dQ.text" = "ツイッター（@relief_browser）";
+
+/* Class = "UILabel"; text = "Rate and Review"; ObjectID = "rHM-bJ-jZO"; */
+"rHM-bJ-jZO.text" = "評価とレビュー";
+
+/* Class = "UILabel"; text = "Version"; ObjectID = "sOn-nT-CRd"; */
+"sOn-nT-CRd.text" = "バージョン";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "vKm-TF-ius"; */
+"vKm-TF-ius.title" = "設定";
+
+"aAb-BX-o1y.text" = "システムの設定を開く";
+
+"3wb-MQ-JHj.text" = "オンボーディングを表示";

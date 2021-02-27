@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HBM-Tc-C9j">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="LqL-vk-Lz8">
+            <objects>
+                <viewController id="Li4-cJ-Gvp" customClass="MainViewController" customModule="UITabBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bPr-r8-i3q">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dAi-qC-wpl">
+                                <rect key="frame" x="0.0" y="765" width="414" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="YoM-kk-Go4"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="Ims-Re-1RU" kind="embed" id="sD8-IT-7C4"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iv1-gw-Bie">
+                                <rect key="frame" x="0.0" y="88" width="414" height="677"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tqC-PF-kKX">
+                                <rect key="frame" x="0.0" y="88" width="414" height="4"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="4" id="hiF-W5-Ve7"/>
+                                </constraints>
+                            </progressView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9Nk-zX-e1v"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="tqC-PF-kKX" firstAttribute="top" secondItem="9Nk-zX-e1v" secondAttribute="top" id="0PT-Np-CuP"/>
+                            <constraint firstItem="iv1-gw-Bie" firstAttribute="top" secondItem="9Nk-zX-e1v" secondAttribute="top" id="Dz5-uD-PD0"/>
+                            <constraint firstItem="iv1-gw-Bie" firstAttribute="leading" secondItem="9Nk-zX-e1v" secondAttribute="leading" id="FFZ-f8-nJX"/>
+                            <constraint firstItem="dAi-qC-wpl" firstAttribute="leading" secondItem="9Nk-zX-e1v" secondAttribute="leading" id="LOw-hE-WvY"/>
+                            <constraint firstItem="9Nk-zX-e1v" firstAttribute="trailing" secondItem="iv1-gw-Bie" secondAttribute="trailing" id="NCe-xa-LZD"/>
+                            <constraint firstItem="9Nk-zX-e1v" firstAttribute="bottom" secondItem="dAi-qC-wpl" secondAttribute="bottom" id="Nhi-sq-ovV"/>
+                            <constraint firstItem="dAi-qC-wpl" firstAttribute="trailing" secondItem="9Nk-zX-e1v" secondAttribute="trailing" id="WE8-bU-TaQ"/>
+                            <constraint firstItem="dAi-qC-wpl" firstAttribute="top" secondItem="iv1-gw-Bie" secondAttribute="bottom" id="fND-wV-ANB"/>
+                            <constraint firstItem="tqC-PF-kKX" firstAttribute="leading" secondItem="9Nk-zX-e1v" secondAttribute="leading" id="jWs-9k-Vbo"/>
+                            <constraint firstItem="9Nk-zX-e1v" firstAttribute="trailing" secondItem="tqC-PF-kKX" secondAttribute="trailing" id="oFr-RS-BBO"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems>
+                        <barButtonItem title="Back" image="chevron.backward" catalog="system" width="44" id="px7-SX-IwR">
+                            <connections>
+                                <action selector="goBack:" destination="Li4-cJ-Gvp" id="VoD-QQ-JDw"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="mUW-HP-teK"/>
+                        <barButtonItem title="Forward" image="chevron.right" catalog="system" width="44" id="rPH-E0-u2E">
+                            <connections>
+                                <action selector="goForward:" destination="Li4-cJ-Gvp" id="4m8-GD-z4W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="XaA-xl-pk1"/>
+                        <barButtonItem title="Search" image="magnifyingglass" catalog="system" width="44" id="kCR-Wc-YOS">
+                            <connections>
+                                <action selector="showSearch:" destination="Li4-cJ-Gvp" id="2zo-G8-Id6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="drJ-kS-WSh"/>
+                        <barButtonItem title="Close" image="xmark.square" catalog="system" width="44" id="FJK-cG-cbw">
+                            <connections>
+                                <action selector="close:" destination="Li4-cJ-Gvp" id="uwy-pm-dEi"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Thk-1E-XeA"/>
+                        <barButtonItem width="44" systemItem="bookmarks" id="uNI-UR-jzV">
+                            <connections>
+                                <segue destination="BWN-OP-LED" kind="presentation" id="8Yz-Zo-FaP"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
+                    <navigationItem key="navigationItem" id="meC-Kb-q7s"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="backButton" destination="px7-SX-IwR" id="A73-Ym-hvh"/>
+                        <outlet property="closeButton" destination="FJK-cG-cbw" id="9Sc-1p-z9C"/>
+                        <outlet property="forwardButton" destination="rPH-E0-u2E" id="2xd-il-ZPc"/>
+                        <outlet property="pageView" destination="iv1-gw-Bie" id="5bC-MO-kdf"/>
+                        <outlet property="progressBar" destination="tqC-PF-kKX" id="Ycc-jV-02V"/>
+                        <outlet property="searchButton" destination="kCR-Wc-YOS" id="8LP-H8-65f"/>
+                        <segue destination="llR-lw-tZY" kind="presentation" identifier="SettingsSegue" id="G3D-9Q-7WB"/>
+                        <segue destination="L07-Q5-lni" kind="presentation" identifier="OnboardingSegue" id="i6A-dY-rTE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VGK-pg-viL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49.275362318840585" y="85.714285714285708"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZZ6-8d-j24">
+            <objects>
+                <navigationController toolbarHidden="NO" id="HBM-Tc-C9j" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5ji-UU-qKC">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="eOu-Kf-SwN">
+                        <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="Li4-cJ-Gvp" kind="relationship" relationship="rootViewController" id="9Jh-fn-c5x"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="He8-we-lpE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-800" y="86"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="uli-49-fmh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="llR-lw-tZY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RBU-Oi-041" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="650" y="-108"/>
+        </scene>
+        <!--Tabs View Controller-->
+        <scene sceneID="7in-c8-xjC">
+            <objects>
+                <viewController id="Ims-Re-1RU" customClass="TabsViewController" customModule="UITabBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9rI-Ps-LRu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="bFU-mn-0Wy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sZM-Sx-eCT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="891" y="86"/>
+        </scene>
+        <!--Bookmark-->
+        <scene sceneID="Lt8-Js-gR6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Bookmark" id="BWN-OP-LED" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="clU-Cw-s94" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="657" y="200"/>
+        </scene>
+        <!--Onboarding-->
+        <scene sceneID="vrn-d9-QNa">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" id="L07-Q5-lni" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J9B-hj-ehC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="652" y="-29"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="xmark.square" catalog="system" width="128" height="114"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

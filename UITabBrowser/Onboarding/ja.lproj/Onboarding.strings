@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "The simplest tab browser"; ObjectID = "Les-cX-bvM"; */
+"Les-cX-bvM.text" = "超シンプルなタブブラウザ";
+
+/* Class = "UILabel"; text = "The simplest tab browser"; ObjectID = "Pc5-Az-nYQ"; */
+"Pc5-Az-nYQ.text" = "タブを長押しして、さまざまな操作が可能。";
+
+/* Class = "UILabel"; text = "Tap the magnifier button if you want to search"; ObjectID = "VZA-lb-Zh0"; */
+"VZA-lb-Zh0.text" = "虫眼鏡ボタンを押して検索開始。";
+
+/* Class = "UIBarButtonItem"; title = "Skip"; ObjectID = "cJ0-5X-mjX"; */
+"cJ0-5X-mjX.title" = "スキップ";
+
+/* Class = "UIButton"; normalTitle = "Read the Privacy Policy"; ObjectID = "dOd-qQ-8t5"; */
+"dOd-qQ-8t5.normalTitle" = "プライバシーポリシー";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "xpS-1a-zfW"; */
+"xpS-1a-zfW.normalTitle" = "次へ";
+
+"h7T-Jf-aGu.text" = "閉じるボタンを長押しして、\n全てのタブを削除可能。";
+
+"CyJ-uN-jmU.text" = "検索キーワードか URL を入力して\nはじめましょう！";
+
+"smS-e5-BXq.placeholder" = "検索キーワードか URL";
