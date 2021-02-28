@@ -5,8 +5,8 @@
 /* Class = "UILabel"; text = "Detail"; ObjectID = "5IV-95-yUG"; */
 "5IV-95-yUG.text" = "検索エンジン";
 
-/* Class = "UITableViewSection"; headerTitle = "About relief"; ObjectID = "ANe-At-nRt"; */
-"ANe-At-nRt.headerTitle" = "relief について";
+/* Class = "UITableViewSection"; headerTitle = "About UITabBrowser"; ObjectID = "ANe-At-nRt"; */
+"ANe-At-nRt.headerTitle" = "UITabBrowser について";
 
 /* Class = "UILabel"; text = "Source Code on GitHub"; ObjectID = "BXX-G3-UWG"; */
 "BXX-G3-UWG.text" = "ソースコード（GitHub）";
