@@ -8,8 +8,8 @@
 /* Class = "UILabel"; text = "Tap the magnifier button if you want to search"; ObjectID = "VZA-lb-Zh0"; */
 "VZA-lb-Zh0.text" = "Tap the magnifier button if you want to search";
 
-/* Class = "UILabel"; text = "relief"; ObjectID = "YpV-rA-yOi"; */
-"YpV-rA-yOi.text" = "relief";
+/* Class = "UILabel"; text = "UITabBrowser"; ObjectID = "YpV-rA-yOi"; */
+"YpV-rA-yOi.text" = "UITabBrowser";
 
 /* Class = "UILabel"; text = "3"; ObjectID = "aPT-Zd-bi6"; */
 "aPT-Zd-bi6.text" = "3";
