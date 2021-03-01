@@ -21,6 +21,16 @@ extension BrowserDelegate {
 
 typealias BrowserID = UUID
 
+enum URLSchema: String, CaseIterable  {
+    case tel = "tel"
+    case mailto = "mailto"
+    case apps = "itms-appss"
+    
+    static var urlSchemas: [String] {
+        self.allCases.map { $0.rawValue }
+    }
+}
+
 class Browser {
     var viewController: UIViewController! = nil
     let id: BrowserID = UUID()
@@ -42,6 +52,7 @@ class Browser {
     }
     var offset = CGPoint(x: 0.0, y: 0.0)
     var velocity = CGPoint(x: 0.0, y: 0.0)
+    var isContentLoaded = false
     
     @Published private var faviconLoader: FaviconLoader = FaviconLoader()
     
@@ -51,10 +62,11 @@ class Browser {
     // Combine
     private var cancellables: Set<AnyCancellable> = []
     
-    init(type: PageType, urlString: String? = nil, selected: Bool = false, pinned: Bool = false) {
+    init(type: PageType, urlString: String? = nil, title: String = "", selected: Bool = false, pinned: Bool = false) {
         self.type = type
         self.selected = selected
         self.pinned = pinned
+        self.title = title
         switch type {
         case .browser:
             // Browser
@@ -62,7 +74,6 @@ class Browser {
                 self.url = url
                 let webVC = WebViewController()
                 webVC.delegate = self
-                webVC.load(url: url)
                 self.viewController = webVC
             } else {
                 fatalError("URL is invalid: \(urlString ?? "nil")")
@@ -91,6 +102,22 @@ class Browser {
             .sink(receiveValue: { [weak self] in
                 self?.favicon = $0
             })
+            .store(in: &cancellables)
+        
+        // load the page if the tab selected
+        $selected
+            .compactMap {
+                // return url only if all conditions are true
+                ($0 && self.type == .browser && !self.isContentLoaded)
+                    ? self.url ?? nil : nil
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] url in
+                // Load contents
+                (self?.viewController as! WebViewController).load(url: url)
+                // Set flag
+                self?.isContentLoaded = true
+            }
             .store(in: &cancellables)
     }
     
@@ -188,6 +215,13 @@ extension Browser: WebViewControllerDelegate {
             Items.shared.add(
                 type: .history, title: title, url: url, keywords: "", browserId: id
             )
+        }
+    }
+    
+    func webViewController(_ viewController: WebViewController, openExternalApp url: URL) {
+        // Close myself if App Store is launched
+        if url.absoluteString.starts(with: "itms-appss") {
+            Browsers.shared.delete(id: self.id)
         }
     }
 }

@@ -12,7 +12,20 @@ class TabCell: UICollectionViewCell {
 
     var imageView = UIImageView()
     var titleLabel = UILabel()
-    let progressView = UIProgressView(progressViewStyle: .bar)
+    var activityView = UIActivityIndicatorView(style: .medium)
+    
+    var isActivityAnimating: Bool {
+        get {
+            return activityView.isAnimating
+        }
+        set {
+            if newValue {
+                activityView.startAnimating()
+            } else {
+                activityView.stopAnimating()
+            }
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -32,10 +45,10 @@ extension TabCell {
     func configureCell() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        progressView.translatesAutoresizingMaskIntoConstraints = false
+        activityView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(progressView)
+        contentView.addSubview(activityView)
         
         contentView.directionalLayoutMargins = .zero
         
@@ -48,17 +61,16 @@ extension TabCell {
         imageView.tintColor = .lightGray
 
         let imageSize: CGFloat = 20.0
-        let progressHeight: CGFloat = 7.0
         let imageLeadingMargin: CGFloat = 4.0
         let titleLeadingMargin: CGFloat = 4.0
         let titleTrailingMargin: CGFloat = -4.0
         let contentOffsetY: CGFloat = 2.0
         NSLayoutConstraint.activate([
             // Progress View
-            progressView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            progressView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            progressView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: progressHeight),
+            activityView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+            activityView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            activityView.widthAnchor.constraint(equalTo: imageView.widthAnchor),
+            activityView.heightAnchor.constraint(equalTo: imageView.heightAnchor),
             // Image View
             imageView.leadingAnchor.constraint(
                 equalTo: contentView.leadingAnchor,

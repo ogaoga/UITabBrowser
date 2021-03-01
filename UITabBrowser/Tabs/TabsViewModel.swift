@@ -40,7 +40,6 @@ class TabsViewModel: ObservableObject {
                             favicon: browser.favicon,
                             active: browser.selected,
                             loading: browser.loading,
-                            progress: browser.progress,
                             pinned: browser.pinned
                         )
                     case .search:
@@ -52,8 +51,7 @@ class TabsViewModel: ObservableObject {
                             favicon: UIImage(systemName: "magnifyingglass"),
                             active:  browser.selected,
                             loading: false,
-                            progress: 1.0,
-                            pinned: browser.pinned
+                            pinned: false
                         )
                     }
                 }

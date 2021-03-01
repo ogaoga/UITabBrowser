@@ -30,6 +30,7 @@ class TabsViewController: UIViewController {
         
         // subscribe tabs
         viewModel.$tabs
+            .removeDuplicates()
             .receive(on: DispatchQueue.main)
             .sink { tabs in
                 // update tabs
@@ -124,9 +125,9 @@ extension TabsViewController {
             cell.titleLabel.text = tab.title.isEmpty
                 ? NSLocalizedString("Loading...", comment: "in Tab")
                 : tab.title
-            cell.progressView.setProgress(tab.progress, animated: true)
-            cell.progressView.isHidden = !tab.loading
             cell.imageView.image = tab.pinned ? UIImage(systemName: "pin.fill") : tab.favicon
+            cell.imageView.isHidden = tab.loading
+            cell.isActivityAnimating = tab.loading
             cell.isSelected = tab.active
             
             // Background
