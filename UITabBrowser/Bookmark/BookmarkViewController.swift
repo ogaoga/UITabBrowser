@@ -16,11 +16,8 @@ class BookmarkViewController: UIViewController {
     
     private let viewModel = BookmarkViewModel()
     private var cancellables: Set<AnyCancellable> = []
+    private var searchResultsController: SearchResultsController? = nil
 
-    // MARK: - Published properties
-    
-    @Published var scope: Scope = .bookmark
-    
     // MARK: - Outlet
     
     @IBOutlet weak var deleteAllButton: UIBarButtonItem!
@@ -37,7 +34,7 @@ class BookmarkViewController: UIViewController {
                     "Are you sure you want to delete all %@ items?",
                     comment: "Confirmation in bookmark view"
                 ),
-                scope.title
+                viewModel.scope.title
             ),
             preferredStyle: .actionSheet
         )
@@ -49,7 +46,7 @@ class BookmarkViewController: UIViewController {
                 ),
                 style: .destructive
             ) { action in
-                self.viewModel.deleteAll(scope: self.scope)
+                self.viewModel.deleteAll(scope: self.viewModel.scope)
             }
         )
         alert.addAction(
@@ -78,13 +75,8 @@ class BookmarkViewController: UIViewController {
 
         configureSearchController()
         
-        // Set scope
-        viewModel.$scope
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$scope)
-        
         // Title
-        $scope
+        viewModel.$scope
             .receive(on: DispatchQueue.main)
             .map { $0.title }
             .sink(receiveValue: { [weak self] in
@@ -96,6 +88,28 @@ class BookmarkViewController: UIViewController {
         viewModel.$isDeleteAllButtonEnabled
             .receive(on: DispatchQueue.main)
             .assign(to: \.isEnabled, on: deleteAllButton)
+            .store(in: &cancellables)
+        
+        // Query
+        viewModel.$scope
+            .combineLatest(viewModel.$enteredText)
+            .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
+            .map {
+                var type: ItemType
+                switch $0 {
+                case .bookmark:
+                    type = .bookmark
+                case .history:
+                    type = .history
+                case .search:
+                    type = .keywords
+                }
+                return (type, $1)
+            }
+            .receive(on: DispatchQueue.main)
+            .sink { (type, filter) in
+                self.searchResultsController?.getItems(itemType: type, filterText: filter)
+            }
             .store(in: &cancellables)
     }
     
@@ -126,11 +140,11 @@ class BookmarkViewController: UIViewController {
 extension BookmarkViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SearchResultsSegue" {
-            let searchResultsController = segue.destination as! SearchResultsController
+            searchResultsController = segue.destination as? SearchResultsController
             // Set initial type
-            searchResultsController.initialItemType = .bookmark
+            searchResultsController?.initialItemType = .bookmark
             // Set delegate to handle tapping an item in the search result
-            searchResultsController.delegate = self
+            searchResultsController?.delegate = self
         }
     }
 }

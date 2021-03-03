@@ -31,6 +31,17 @@ class BookmarkViewModel: ObservableObject {
         static var titles: [String] {
             return allCases.map { $0.title }
         }
+        
+        var itemType: ItemType {
+            switch self {
+            case .bookmark:
+                return .bookmark
+            case .history:
+                return .history
+            case .search:
+                return .keywords
+            }
+        }
     }
     
     // MARK: - Private properties
@@ -40,6 +51,7 @@ class BookmarkViewModel: ObservableObject {
     // MARK: - Published properties
     
     @Published var scope: Scope = .bookmark
+    @Published var enteredText = ""
     @Published var isDeleteAllButtonEnabled = true
 
     // MARK: - Initializer & deinitializer
@@ -48,25 +60,12 @@ class BookmarkViewModel: ObservableObject {
         // DeleteAll button
         $scope
             .combineLatest(Items.shared.$items)
-            .map { (scope, items) in
+            .map { (scope, _) in
+                // TODO: fix this workaround
+                let items = Items.shared.getItems(type: scope.itemType, filterText: self.enteredText)
                 return (scope == .history || scope == .search) && items.count > 0
             }
             .assign(to: &$isDeleteAllButtonEnabled)
-
-        // Set time in Items
-        $scope
-            .sink { scope in
-                let items = Items.shared
-                switch scope {
-                case .bookmark:
-                    items.setType(.bookmark)
-                case .history:
-                    items.setType(.history)
-                case .search:
-                    items.setType(.keywords)
-                }
-            }
-            .store(in: &cancellables)
     }
     
     deinit {
@@ -80,16 +79,14 @@ class BookmarkViewModel: ObservableObject {
     }
     
     func setEnteredText(_ text: String) {
-        Items.shared.setFilterText(text)
+        self.enteredText = text
     }
     
     func deleteAll(scope: Scope) {
         let items = Items.shared
         switch scope {
-        case .history:
-            items.deleteAll(itemType: .history)
-        case .search:
-            items.deleteAll(itemType: .keywords)
+        case .history, .search:
+            items.deleteAll(itemType: scope.itemType)
         default:
             break
         }

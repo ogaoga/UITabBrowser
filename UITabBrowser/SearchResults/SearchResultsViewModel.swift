@@ -12,9 +12,11 @@ let SetTextInSearchBarNotification = Notification.Name(rawValue: "FillSearchBar"
 
 class SearchResultsViewModel: ObservableObject {
     
-    @Published var rows: [Row] = [];
+    @Published var rows: [Row] = []
     @Published var itemType: ItemType = .keywords
+    @Published private var items: [Item] = []
     
+    private var filterText = ""
     private let sharedItems = Items.shared
 
     enum Section: Int, CaseIterable {
@@ -63,19 +65,25 @@ class SearchResultsViewModel: ObservableObject {
     }
     
     init(initialItemType: ItemType = .keywords) {
-        // Set initial item type
-        sharedItems.setType(initialItemType)
-
         // Subscribe items
-        sharedItems.$items
+        $items
             .map { items in
                 return items.map { Row(item: $0) }
             }
             .assign(to: &$rows)
         
-        // Subscribe item type to switch zero item message
-        sharedItems.$itemType
-            .assign(to: &$itemType)
+        sharedItems.$items
+            .map { _ in
+                // TODO: Fix this workaround
+                return self.sharedItems.getItems(
+                    type: self.itemType, filterText: self.filterText
+                )
+            }
+            .assign(to: &$items)
+        
+        // get initial data
+        self.itemType = initialItemType
+        items = sharedItems.getItems(type: initialItemType, filterText: "")
     }
     
     func setKeywords(_ keywords: String) {
@@ -88,7 +96,13 @@ class SearchResultsViewModel: ObservableObject {
     func delete(indexPath: IndexPath) {
         let row = rows[indexPath.row]
         if let itemId = row.item?.id {
-            Items.shared.delete(id: itemId)
+            sharedItems.delete(id: itemId)
         }
+    }
+    
+    func getItems(itemType: ItemType, filterText: String) {
+        self.itemType = itemType
+        self.filterText = filterText
+        self.items = sharedItems.getItems(type: itemType, filterText: filterText)
     }
 }
