@@ -1,0 +1,30 @@
+name: Build and Unit Test
+
+on:
+  # Triggers the workflow on pull request events but only for the main branch
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macOS-latest
+    steps:
+    - uses: actions/checkout@v1
+    # Select Xcode version
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_12.4.app/Contents/Developer'
+    - name: Show Xcode version
+      run: xcodebuild -version
+    # Run build
+    - name: Build
+      run: xcodebuild
+            -sdk iphonesimulator
+            -configuration Debug
+            build
+    # Run unit test
+    - name: Run tests
+      run: xcodebuild
+            -scheme UITabBrowser
+            -sdk iphonesimulator
+            -destination 'platform=iOS Simulator,name=iPhone 12 mini'
+            clean test
