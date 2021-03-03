@@ -29,7 +29,7 @@ class SearchResultsController: UIViewController {
 
     // Collection View
     private var collectionView: UICollectionView! = nil
-    var dataSource: UICollectionViewDiffableDataSource<Section, Row>! = nil
+    private var diffableDataSource: UICollectionViewDiffableDataSource<Section, Row>! = nil
 
     // For Combine
     private var cancellables: Set<AnyCancellable> = []
@@ -68,7 +68,7 @@ class SearchResultsController: UIViewController {
                 var snapshot = NSDiffableDataSourceSnapshot<Section, Row>()
                 snapshot.appendSections([.searchHistory])
                 snapshot.appendItems(rows)
-                self?.dataSource.apply(snapshot, animatingDifferences: true)
+                self?.diffableDataSource.apply(snapshot, animatingDifferences: true)
                 // Hide list view (show message view)
                 self?.listView.isHidden = rows.count == 0
             }
@@ -154,7 +154,7 @@ extension SearchResultsController {
             // Accessaries
             cell.accessories = []
         }
-        dataSource = UICollectionViewDiffableDataSource<Section, Row>(collectionView: collectionView) {
+        diffableDataSource = UICollectionViewDiffableDataSource<Section, Row>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, identifier: Row) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
         }
@@ -182,5 +182,13 @@ extension SearchResultsController: SearchResultsControllerDelegate {
     func searchResultsController(_ controller: SearchResultsController, didSelect item: Item) {
         // Set keywords
         viewModel.setKeywords(item.keywords)
+    }
+}
+
+// MARK: Items
+
+extension SearchResultsController {
+    func getItems(itemType: ItemType, filterText: String) {
+        viewModel.getItems(itemType: itemType, filterText: filterText)
     }
 }

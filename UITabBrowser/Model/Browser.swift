@@ -59,6 +59,9 @@ class Browser {
     // delegate
     weak var delegate: BrowserDelegate?
 
+    // Search results controller
+    var searchResultController: SearchResultsController? = nil
+
     // Combine
     private var cancellables: Set<AnyCancellable> = []
     
@@ -78,12 +81,13 @@ class Browser {
             } else {
                 fatalError("URL is invalid: \(urlString ?? "nil")")
             }
+            self.searchResultController = nil
         case .search:
             // Search Result
             let storyboard = UIStoryboard(name: "SearchResults", bundle: nil)
-            let vc = storyboard.instantiateInitialViewController() as! SearchResultsController
-            vc.initialItemType = .keywords
-            self.viewController = vc
+            searchResultController = storyboard.instantiateInitialViewController() as? SearchResultsController
+            searchResultController?.initialItemType = .keywords
+            self.viewController = searchResultController
         }
         
         // Observe url to fetch favicon
@@ -138,6 +142,7 @@ class Browser {
                 // Replace with WebView
                 self.viewController.view.isHidden = true
                 self.viewController = nil
+                self.searchResultController = nil
                 self.type = .browser
                 self.url = url
                 let webVC = WebViewController()
@@ -160,7 +165,9 @@ class Browser {
     
     func reload() {
         if let vc = self.viewController, type == .browser {
-            (vc as! WebViewController).webView.reload()
+            if let webView = (vc as! WebViewController).webView {
+                webView.reload()
+            }
         }
     }
 }

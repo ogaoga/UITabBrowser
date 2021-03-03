@@ -76,6 +76,9 @@ class SearchBarViewModel: NSObject {
     }
     
     func setEnteredText(_ text: String) {
-        items.setFilterText(text)
+        // Update search results
+        if let searchResultsController = currentBrowser?.searchResultController {
+            searchResultsController.getItems(itemType: .keywords, filterText: text)
+        }
     }
 }

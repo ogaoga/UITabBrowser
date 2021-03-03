@@ -83,6 +83,9 @@ class SearchBar: UISearchBar {
         
         // focus the text field when switch to search page
         viewModel.$currentBrowser
+            .removeDuplicates(by: { (a, b) in
+                return a?.id == b?.id && a?.url == b?.url
+            })
             .compactMap { $0 }
             .receive(on: DispatchQueue.main)
             .sink { browser in
