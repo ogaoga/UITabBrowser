@@ -66,6 +66,7 @@ final class Settings {
                     Browser(
                         type: .browser,
                         urlString: $0.url.absoluteString,
+                        title: $0.title,
                         selected: $0.selected,
                         pinned: $0.pinned
                     )

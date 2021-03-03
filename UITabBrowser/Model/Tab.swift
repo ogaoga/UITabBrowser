@@ -16,6 +16,5 @@ struct Tab: Hashable {
     var favicon: UIImage?
     var active: Bool
     var loading: Bool
-    var progress: Float
     var pinned: Bool
 }

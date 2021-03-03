@@ -19,6 +19,7 @@ protocol WebViewControllerDelegate: AnyObject {
     func webViewController(_ viewController: WebViewController, openNewTab url: URL)
     func webViewController(_ viewController: WebViewController, didScroll offset: CGPoint)
     func webViewController(_ viewController: WebViewController, WillEndDragging velocity: CGPoint)
+    func webViewController(_ viewController: WebViewController, openExternalApp url: URL)
     func webViewControllerDidFinishNavigation(_ viewController: WebViewController)
 }
 
@@ -32,6 +33,7 @@ extension WebViewControllerDelegate {
     func webViewController(_ viewController: WebViewController, openNewTab url: URL) {}
     func webViewController(_ viewController: WebViewController, didScroll offset: CGPoint) {}
     func webViewController(_ viewController: WebViewController, WillEndDragging velocity: CGPoint) {}
+    func webViewController(_ viewController: WebViewController, openExternalApp url: URL) {}
     func webViewControllerDidFinishNavigation(_ viewController: WebViewController) {}
 }
 
@@ -211,11 +213,14 @@ extension WebViewController: WKNavigationDelegate {
         
         // Handle special schemes
         if let url = navigationAction.request.url {
-            let schemes = ["tel", "mailto"]
+            let schemes = URLSchema.urlSchemas
             if schemes.contains(url.scheme ?? "") {
+                // Open external app
                 let app = UIApplication.shared
                 app.open(url, options: [:], completionHandler: nil)
                 decisionHandler(.cancel)
+                // Call delegate
+                delegate?.webViewController(self, openExternalApp: url)
                 return
             }
         }
