@@ -1,7 +1,5 @@
 # UITabBrowser
 
-[![Build Status](https://app.bitrise.io/app/02475b4f78e1a45a/status.svg?token=MW-ci6x8zoD8n-lTPn9NSw&branch=main)](https://app.bitrise.io/app/02475b4f78e1a45a)
-
 The simplest tab browser for iOS. No tracking, ads, 3rd party library.
 
 ![Simulator Screen Shot - iPhone 12 mini - 2021-02-27 at 20 43 18](https://user-images.githubusercontent.com/93489/109386221-a3522380-793c-11eb-9714-b15e2741e886.png) 
