@@ -39,11 +39,13 @@ class BrowsersViewModel: NSObject, ObservableObject {
             .map { browsers in
                 return browsers.firstIndex { $0.selected } ?? 0
             }
+            .removeDuplicates()
             .sink(receiveValue: { [weak self] in self?.selectedIndex = $0 })
             .store(in: &cancellables)
         
         // Selected View Controller
         browsers.$selectedViewController
+            .removeDuplicates()
             .sink { [weak self] in self?.selectedViewController = $0 }
             .store(in: &cancellables)
     }

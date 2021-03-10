@@ -37,4 +37,17 @@ extension String {
     var isSecureURL: Bool {
         return self.lowercased().starts(with: "https://")
     }
+    
+    var isURL: Bool {
+        return self.validURL() != nil
+    }
+    
+    func searchURL(searchURLPrefix: String) -> URL {
+        let lowercasedText = self.lowercased()
+        if let url = lowercasedText.validURL() {
+            return url
+        } else {
+            return URL(string: "\(searchURLPrefix)\(self.urlEncode())")!
+        }
+    }
 }

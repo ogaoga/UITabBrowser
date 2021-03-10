@@ -161,16 +161,18 @@ final class Browsers: NSObject, ObservableObject {
         }
     }
     
-    private func hasSearch() -> Bool {
-        return browsers.firstIndex { $0.type == .search } != nil
+    func getSearchViewID() -> BrowserID? {
+        if let index = browsers.firstIndex(where: { $0.type == .search }) {
+            return browsers[index].id
+        } else {
+            return nil
+        }
     }
     
     func showSearch() {
-        if hasSearch() {
+        if let id = getSearchViewID() {
             // move to search
-            if let browser = browsers.find(where: { $0.type == .search }) {
-                select(id: browser.id)
-            }
+            select(id: id)
         } else {
             // Add search
             appendSearch()
@@ -216,7 +218,7 @@ final class Browsers: NSObject, ObservableObject {
         }
     }
     
-    private func get(id: BrowserID) -> Browser? {
+    func get(id: BrowserID) -> Browser? {
         return browsers.find { $0.id == id }
     }
 
