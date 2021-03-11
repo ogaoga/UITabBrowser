@@ -40,29 +40,20 @@ class SearchBarViewModel: NSObject {
     }
 
     func search(_ text: String) {
-        let lowercasedText = text.lowercased()
-        if let url = lowercasedText.validURL() {
-            // Open url
-            openURL(url: url)
-        } else {
-            let urlPrefix = Settings.shared.searchEngine.urlPrefix
-            if let url = URL(string: "\(urlPrefix)\(text.urlEncode())") {
-                // Open url of google search
-                openURL(url: url)
-                // Save keywords
-                if let currentBrowser = currentBrowser {
-                    items.add(
-                        type: .keywords,
-                        title: text,
-                        url: url,
-                        keywords: text,
-                        browserId: currentBrowser.id
-                    )
-                } else {
-                    print("Exception")
-                }
+        let url = text.searchURL(searchURLPrefix: Settings.shared.searchEngine.urlPrefix)
+        openURL(url: url)
+        if !text.isURL {
+            // Save keywords
+            if let currentBrowser = currentBrowser {
+                items.add(
+                    type: .keywords,
+                    title: text,
+                    url: url,
+                    keywords: text,
+                    browserId: currentBrowser.id
+                )
             } else {
-                print("Unexpected error", #file, #line)
+                print("Exception")
             }
         }
     }

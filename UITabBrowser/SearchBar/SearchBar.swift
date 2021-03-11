@@ -14,7 +14,7 @@ class SearchBar: UISearchBar {
     private var cancellables: Set<AnyCancellable> = []
     
     private var shouldKeepUrl = true
-    @Published private var editing = false
+    @Published var editing = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -107,14 +107,6 @@ class SearchBar: UISearchBar {
                 self?.becomeFirstResponder()
             })
             .store(in: &cancellables)
-        
-        // Show cancel button if search view appears
-        viewModel.$isSearch
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { isSearch in
-                self.setShowsCancelButton(isSearch, animated: true)
-            })
-            .store(in: &cancellables)
     }
     
     required init?(coder: NSCoder) {
@@ -144,6 +136,8 @@ extension SearchBar: UISearchBarDelegate {
             self.text = viewModel.url?.absoluteString ?? ""
         }
         shouldKeepUrl = true
+        // Reset filter text
+        viewModel.setEnteredText("")
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

@@ -29,6 +29,15 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="677"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <containerView hidden="YES" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G3a-JU-5F6">
+                                <rect key="frame" x="0.0" y="852" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="rfX-11-hV5"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="aPh-T8-q7c" kind="embed" id="VRH-pP-Ce9"/>
+                                </connections>
+                            </containerView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tqC-PF-kKX">
                                 <rect key="frame" x="0.0" y="88" width="414" height="4"/>
                                 <constraints>
@@ -41,14 +50,17 @@
                         <constraints>
                             <constraint firstItem="tqC-PF-kKX" firstAttribute="top" secondItem="9Nk-zX-e1v" secondAttribute="top" id="0PT-Np-CuP"/>
                             <constraint firstItem="iv1-gw-Bie" firstAttribute="top" secondItem="9Nk-zX-e1v" secondAttribute="top" id="Dz5-uD-PD0"/>
+                            <constraint firstItem="G3a-JU-5F6" firstAttribute="trailing" secondItem="9Nk-zX-e1v" secondAttribute="trailing" id="EpO-k5-xsN"/>
                             <constraint firstItem="iv1-gw-Bie" firstAttribute="leading" secondItem="9Nk-zX-e1v" secondAttribute="leading" id="FFZ-f8-nJX"/>
                             <constraint firstItem="dAi-qC-wpl" firstAttribute="leading" secondItem="9Nk-zX-e1v" secondAttribute="leading" id="LOw-hE-WvY"/>
                             <constraint firstItem="9Nk-zX-e1v" firstAttribute="trailing" secondItem="iv1-gw-Bie" secondAttribute="trailing" id="NCe-xa-LZD"/>
                             <constraint firstItem="9Nk-zX-e1v" firstAttribute="bottom" secondItem="dAi-qC-wpl" secondAttribute="bottom" id="Nhi-sq-ovV"/>
                             <constraint firstItem="dAi-qC-wpl" firstAttribute="trailing" secondItem="9Nk-zX-e1v" secondAttribute="trailing" id="WE8-bU-TaQ"/>
                             <constraint firstItem="dAi-qC-wpl" firstAttribute="top" secondItem="iv1-gw-Bie" secondAttribute="bottom" id="fND-wV-ANB"/>
+                            <constraint firstItem="G3a-JU-5F6" firstAttribute="leading" secondItem="9Nk-zX-e1v" secondAttribute="leading" id="gwX-7x-shX"/>
                             <constraint firstItem="tqC-PF-kKX" firstAttribute="leading" secondItem="9Nk-zX-e1v" secondAttribute="leading" id="jWs-9k-Vbo"/>
                             <constraint firstItem="9Nk-zX-e1v" firstAttribute="trailing" secondItem="tqC-PF-kKX" secondAttribute="trailing" id="oFr-RS-BBO"/>
+                            <constraint firstAttribute="bottom" secondItem="G3a-JU-5F6" secondAttribute="bottom" id="rV8-ky-VGE"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -88,6 +100,8 @@
                         <outlet property="backButton" destination="px7-SX-IwR" id="A73-Ym-hvh"/>
                         <outlet property="closeButton" destination="FJK-cG-cbw" id="9Sc-1p-z9C"/>
                         <outlet property="forwardButton" destination="rPH-E0-u2E" id="2xd-il-ZPc"/>
+                        <outlet property="keyboardBar" destination="G3a-JU-5F6" id="A5J-RQ-sKT"/>
+                        <outlet property="keyboardBarOffset" destination="rV8-ky-VGE" id="wgb-h2-XPB"/>
                         <outlet property="pageView" destination="iv1-gw-Bie" id="5bC-MO-kdf"/>
                         <outlet property="progressBar" destination="tqC-PF-kKX" id="Ycc-jV-02V"/>
                         <outlet property="searchButton" destination="kCR-Wc-YOS" id="8LP-H8-65f"/>
@@ -158,10 +172,52 @@
             </objects>
             <point key="canvasLocation" x="652" y="-29"/>
         </scene>
+        <!--Keyboard Bar View Controller-->
+        <scene sceneID="rz9-bE-8yM">
+            <objects>
+                <viewController id="aPh-T8-q7c" customClass="KeyboardBarViewController" customModule="UITabBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CQf-H3-sO7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0T3-qB-cuu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="odf-m0-6xl"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Paste" image="doc.on.clipboard" catalog="system" id="3Fc-8L-bBc">
+                                        <connections>
+                                            <action selector="pasteText:" destination="aPh-T8-q7c" id="Izb-Jg-m8y"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="hAo-T1-4Pc"/>
+                                    <barButtonItem systemItem="cancel" id="hdg-jP-FZo">
+                                        <connections>
+                                            <action selector="cancelTextInput:" destination="aPh-T8-q7c" id="4wE-Bg-Qbr"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0j1-Ex-8v0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0T3-qB-cuu" firstAttribute="centerY" secondItem="CQf-H3-sO7" secondAttribute="centerY" id="EZc-vA-Xgs"/>
+                            <constraint firstItem="0T3-qB-cuu" firstAttribute="leading" secondItem="CQf-H3-sO7" secondAttribute="leading" id="H45-tQ-ECr"/>
+                            <constraint firstAttribute="trailing" secondItem="0T3-qB-cuu" secondAttribute="trailing" id="o5d-AR-tbV"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eQS-C6-Uft" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-49" y="532"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="doc.on.clipboard" catalog="system" width="116" height="128"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="xmark.square" catalog="system" width="128" height="114"/>
         <systemColor name="systemBackgroundColor">

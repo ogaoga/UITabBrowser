@@ -20,7 +20,7 @@ class MainViewModel: NSObject, ObservableObject {
     @Published var canGoForward = false
     @Published var url: URL?
     @Published var isCloseButtonEnabled = true
-    @Published var isSearchButtonEnabled = true
+    @Published var isSearchView = false
     @Published var barsHidden = false
     @Published var progress: Float = 0.0
 
@@ -67,8 +67,8 @@ class MainViewModel: NSObject, ObservableObject {
         
         // Search button
         browsers.$currentBrowser
-            .map { $0 != nil && $0!.type != .search }
-            .assign(to: &$isSearchButtonEnabled)
+            .map { $0 != nil && $0!.type == .search }
+            .assign(to: &$isSearchView)
     }
     
     // MARK: - Functions
@@ -104,5 +104,29 @@ class MainViewModel: NSObject, ObservableObject {
     
     func showSearch() {
         browsers.showSearch()
+    }
+    
+    func searchFromClipboard() {
+        if let text = UIPasteboard.general.string?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            if text.isEmpty {
+                // Show Search
+                browsers.showSearch()
+            } else {
+                let urlPrefix = Settings.shared.searchEngine.urlPrefix
+                if let id = browsers.getSearchViewID(), let browser = browsers.get(id: id) {
+                    // search
+                    browser.openURL(url: text.searchURL(searchURLPrefix: urlPrefix))
+                    browsers.select(id: id)
+                } else {
+                    // open new tab
+                    browsers.appendBrowser(
+                        urlString: text.searchURL(searchURLPrefix: urlPrefix).absoluteString
+                    )
+                }
+            }
+        } else {
+            // Show Search
+            browsers.showSearch()
+        }
     }
 }

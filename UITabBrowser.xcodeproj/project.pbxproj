@@ -23,6 +23,7 @@
 		A95E516325DBE45B00BD36EC /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95E516225DBE45B00BD36EC /* Settings.swift */; };
 		A96A1EC125D4C69900750224 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96A1EC025D4C69900750224 /* BookmarkViewController.swift */; };
 		A96F3A8625E12B520048E2EE /* FaviconLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96F3A8525E12B520048E2EE /* FaviconLoader.swift */; };
+		A973006725F66E9000C85C73 /* KeyboardBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A973006625F66E9000C85C73 /* KeyboardBarViewController.swift */; };
 		A9782FA72598D79700654354 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9782FA62598D79700654354 /* MainViewController.swift */; };
 		A9782FB2259B4CE300654354 /* Browsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9782FB1259B4CE300654354 /* Browsers.swift */; };
 		A97F983125DEB83E007D978C /* CollectionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97F983025DEB83E007D978C /* CollectionType.swift */; };
@@ -94,6 +95,7 @@
 		A963570925B85CC000B752A1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A96A1EC025D4C69900750224 /* BookmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewController.swift; sourceTree = "<group>"; };
 		A96F3A8525E12B520048E2EE /* FaviconLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaviconLoader.swift; sourceTree = "<group>"; };
+		A973006625F66E9000C85C73 /* KeyboardBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardBarViewController.swift; sourceTree = "<group>"; };
 		A9782FA62598D79700654354 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		A9782FB1259B4CE300654354 /* Browsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Browsers.swift; sourceTree = "<group>"; };
 		A97F983025DEB83E007D978C /* CollectionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionType.swift; sourceTree = "<group>"; };
@@ -238,6 +240,14 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		A973006525F66E5C00C85C73 /* KeyboardBar */ = {
+			isa = PBXGroup;
+			children = (
+				A973006625F66E9000C85C73 /* KeyboardBarViewController.swift */,
+			);
+			path = KeyboardBar;
+			sourceTree = "<group>";
+		};
 		A98406252598C908006B6F49 = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +280,7 @@
 				A99DC44D25CD731D0095FAD7 /* SearchBar */,
 				A996F64325D046CB005D3F7A /* SearchResults */,
 				A96A1EBF25D4C65D00750224 /* Bookmark */,
+				A973006525F66E5C00C85C73 /* KeyboardBar */,
 				A9D643F225DAA7D10017D79D /* Settings */,
 				A91E73A425E7F73C00418F1E /* Onboarding */,
 				A91E73B225E802DE00418F1E /* Common */,
@@ -532,6 +543,7 @@
 				A9A12D9925BAECAA008843FF /* Tab.swift in Sources */,
 				A91F143325E93D6C00651645 /* Onboarding1ViewController.swift in Sources */,
 				A97F983125DEB83E007D978C /* CollectionType.swift in Sources */,
+				A973006725F66E9000C85C73 /* KeyboardBarViewController.swift in Sources */,
 				A98406652598CF1E006B6F49 /* WebViewController.swift in Sources */,
 				A99DC45125CD731D0095FAD7 /* SearchBar.swift in Sources */,
 				A9E4171B25CEC6290030C82A /* Items.swift in Sources */,
@@ -771,14 +783,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = UITabBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -792,14 +804,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = UITabBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

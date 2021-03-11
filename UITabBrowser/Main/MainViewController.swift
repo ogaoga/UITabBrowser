@@ -19,6 +19,7 @@ class MainViewController: UIViewController {
     
     private var cancellables: Set<AnyCancellable> = []
     private var viewModel = MainViewModel()
+    private var isKeyboardHidden = true
 
     // MARK: - Outlets
     
@@ -28,11 +29,17 @@ class MainViewController: UIViewController {
     @IBOutlet weak var closeButton: UIBarButtonItem!
     @IBOutlet weak var searchButton: UIBarButtonItem!
     @IBOutlet weak var progressBar: UIProgressView!
-
+    @IBOutlet weak var keyboardBar: UIView!
+    @IBOutlet weak var keyboardBarOffset: NSLayoutConstraint!
+    
     // MARK: - Actions
     
     @IBAction func showSearch(_ sender: Any) {
-        viewModel.showSearch()
+        if viewModel.isSearchView {
+            searchBar.becomeFirstResponder()
+        } else {
+            viewModel.showSearch()
+        }
     }
     
     @IBAction func goBack(_ sender: Any) {
@@ -101,12 +108,6 @@ class MainViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .assign(to: \.isEnabled, on: closeButton)
             .store(in: &cancellables)
-        
-        // Search button
-        viewModel.$isSearchButtonEnabled
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.isEnabled, on: searchButton)
-            .store(in: &cancellables)
 
         // Progress
         viewModel.$progress
@@ -117,8 +118,12 @@ class MainViewController: UIViewController {
             })
             .store(in: &cancellables)
         
+        // Keyboard
+        configureKeyboardHandling()
+        
         // pull down menu on close button
         configureCloseMenu()
+        configureSearchMenu()
         
         // Onboarding
         if !Settings.shared.onboarding {
@@ -144,7 +149,7 @@ extension MainViewController {
                 discoverabilityTitle: nil,
                 attributes: [],
                 state: .off,
-                handler: { action in
+                handler: { _ in
                     self.viewModel.close()
                 }
             ),
@@ -164,5 +169,109 @@ extension MainViewController {
             title: "", image: nil, identifier: nil,
             options: .displayInline, children: actions
         )
+    }
+    
+    func configureSearchMenu() {
+        let actions = [
+            UIAction(title: NSLocalizedString("Search", comment: "in Context Menu of Search button"),
+                     image: UIImage(systemName: "magnifyingglass"),
+                     identifier: nil,
+                     discoverabilityTitle: nil,
+                     attributes: [],
+                     state: .off,
+                     handler: { _ in
+                        self.showSearch(self)
+                     }
+            ),
+            UIAction(title: NSLocalizedString("Search from Clipboard", comment: "in Context Menu of Search button"),
+                     image: UIImage(systemName: "doc.on.clipboard"),
+                     identifier: nil,
+                     discoverabilityTitle: nil,
+                     attributes: [],
+                     state: .off,
+                     handler: { _ in
+                        self.viewModel.searchFromClipboard()
+                     }
+            ),
+        ]
+        searchButton.menu = UIMenu(
+            title: "", image: nil, identifier: nil,
+            options: .displayInline, children: actions
+        )
+    }
+}
+
+// MARK: - Keyboard bar handling
+
+extension MainViewController {
+    private func configureKeyboardHandling() {
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillShowNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink {
+                self.keyboardBar.isHidden = !self.searchBar.editing
+                if self.isKeyboardHidden {
+                    self.animateWithKeyboard(notification: $0) { keyboardFrame in
+                        self.keyboardBarOffset.constant = keyboardFrame.size.height
+                    }
+                } else {
+                    if let keyboardFrame = $0.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+                        self.keyboardBarOffset.constant = keyboardFrame.size.height
+                    }
+                }
+                self.isKeyboardHidden = false
+            }
+            .store(in: &cancellables)
+        
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardWillHideNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink {
+                self.animateWithKeyboard(notification: $0) { keyboardFrame in
+                    self.keyboardBarOffset.constant = 0.0
+                } completion: { _ in
+                    self.isKeyboardHidden = true
+                }
+            }
+            .store(in: &cancellables)
+        
+        NotificationCenter.default
+            .publisher(for: UIResponder.keyboardDidHideNotification, object: nil)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                self.keyboardBar.isHidden = true
+                self.isKeyboardHidden = true
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func animateWithKeyboard(
+        notification: Notification,
+        animations: ((_ keyboardFrame: CGRect) -> Void)?,
+        completion: ((_ animatingPosition: UIViewAnimatingPosition?) -> Void)? = nil
+    ) {
+        guard let userInfo = notification.userInfo else {
+            return
+        }
+        let duration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as! TimeInterval
+        let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        let curve = notification.userInfo![UIResponder.keyboardAnimationCurveUserInfoKey] as! Int
+        if duration > .zero {
+            let animator = UIViewPropertyAnimator(
+                duration: duration,
+                curve: UIView.AnimationCurve(rawValue: curve)!,
+                animations: {
+                    animations?(keyboardFrame)
+                    self.view?.layoutIfNeeded()
+                }
+            )
+            if completion != nil {
+                animator.addCompletion(completion!)
+            }
+            animator.startAnimation()
+        } else {
+            animations?(keyboardFrame)
+            completion?(nil)
+        }
     }
 }
