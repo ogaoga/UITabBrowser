@@ -13,7 +13,7 @@ class TabCell: UICollectionViewCell {
     var imageView = UIImageView()
     var titleLabel = UILabel()
     var activityView = UIActivityIndicatorView(style: .medium)
-    
+
     var isActivityAnimating: Bool {
         get {
             return activityView.isAnimating
@@ -26,16 +26,16 @@ class TabCell: UICollectionViewCell {
             }
         }
     }
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureCell()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     deinit {
         contentView.subviews.forEach { $0.removeFromSuperview() }
     }
@@ -49,9 +49,9 @@ extension TabCell {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(activityView)
-        
+
         contentView.directionalLayoutMargins = .zero
-        
+
         titleLabel.font = .systemFont(ofSize: 12.0)
         titleLabel.numberOfLines = 1
         titleLabel.adjustsFontForContentSizeCategory = true
@@ -95,7 +95,7 @@ extension TabCell {
             titleLabel.centerYAnchor.constraint(
                 equalTo: contentView.centerYAnchor,
                 constant: contentOffsetY
-            )
+            ),
         ])
     }
 }

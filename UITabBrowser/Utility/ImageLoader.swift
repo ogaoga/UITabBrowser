@@ -5,11 +5,11 @@
 //  Created by ogaoga on 2019/09/13.
 //
 
+import Combine
 import Foundation
 import UIKit
-import Combine
 
-final class ImageCache : NSCache<AnyObject, AnyObject> {
+final class ImageCache: NSCache<AnyObject, AnyObject> {
     static let shared = ImageCache()
     subscript(url: String) -> UIImage? {
         get {
@@ -32,28 +32,28 @@ enum ImageLoaderStatus {
     case failed
 }
 
-class ImageLoader : ObservableObject {
-    
-    @Published var image : UIImage
-    private var cancellable : AnyCancellable? = nil
+class ImageLoader: ObservableObject {
+
+    @Published var image: UIImage
+    private var cancellable: AnyCancellable? = nil
     var status: ImageLoaderStatus
     private let defaultImage: UIImage
-    
+
     convenience init() {
         self.init(defaultImage: UIImage())
     }
-    
+
     init(defaultImage: UIImage) {
         self.status = .notLoaded
         self.image = defaultImage
         self.defaultImage = defaultImage
     }
-    
+
     deinit {
         cancellable?.cancel()
     }
-    
-    func request(url urlString: String) -> Void {
+
+    func request(url urlString: String) {
         status = .notLoaded
         guard let url = URL(string: urlString) else {
             print("URL is not correct.")
@@ -70,24 +70,27 @@ class ImageLoader : ObservableObject {
                     return $0.data
                 }
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { completion in
-                    switch completion {
-                    case .finished:
-                        break
-                    case .failure(let error):
-                        print(error)
-                        self.status = .failed
+                .sink(
+                    receiveCompletion: { completion in
+                        switch completion {
+                        case .finished:
+                            break
+                        case .failure(let error):
+                            print(error)
+                            self.status = .failed
+                        }
+                    },
+                    receiveValue: { value in
+                        if let image = UIImage(data: value) {
+                            self.status = .loaded
+                            self.image = image
+                            ImageCache.shared[urlString] = image
+                        } else {
+                            self.status = .failed
+                            self.image = self.defaultImage
+                        }
                     }
-                }, receiveValue: { value in
-                    if let image = UIImage(data: value) {
-                        self.status = .loaded
-                        self.image = image
-                        ImageCache.shared[urlString] = image
-                    } else {
-                        self.status = .failed
-                        self.image = self.defaultImage
-                    }
-                })
+                )
         }
     }
 }

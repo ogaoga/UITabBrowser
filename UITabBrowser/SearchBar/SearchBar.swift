@@ -5,23 +5,23 @@
 //  Created by ogaoga on 2021/02/02.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class SearchBar: UISearchBar {
 
     private let viewModel = SearchBarViewModel()
     private var cancellables: Set<AnyCancellable> = []
-    
+
     private var shouldKeepUrl = true
     @Published var editing = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         // Delegate
         delegate = self
-        
+
         // Customize
         keyboardType = .webSearch
         autocapitalizationType = .none
@@ -31,17 +31,17 @@ class SearchBar: UISearchBar {
             "Search keywords or URL",
             comment: "Placeholder of Search Bar"
         )
-        
+
         // Show URL in searchBar
         viewModel.$url
-            .receive(on: DispatchQueue.main)
             .map { $0?.absoluteString ?? "" }
             .removeDuplicates()
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] in
                 self?.text = $0
             })
             .store(in: &cancellables)
-        
+
         // Icon
         viewModel.$url
             .dropFirst()
@@ -80,7 +80,7 @@ class SearchBar: UISearchBar {
                 )
             }
             .store(in: &cancellables)
-        
+
         // focus the text field when switch to search page
         viewModel.$currentBrowser
             .removeDuplicates(by: { (a, b) in
@@ -96,7 +96,7 @@ class SearchBar: UISearchBar {
                 }
             }
             .store(in: &cancellables)
-        
+
         // Set keywords form others
         viewModel.$keywords
             .dropFirst()
@@ -108,11 +108,11 @@ class SearchBar: UISearchBar {
             })
             .store(in: &cancellables)
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
@@ -120,7 +120,15 @@ class SearchBar: UISearchBar {
 
 extension SearchBar: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let text = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty {
+        if let text = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines), !text.isEmpty
+        {
+            if !text.isURL {
+                // Set url to search bar if the enterred text is not url
+                searchBar.text =
+                    text.searchURL(
+                        searchURLPrefix: Settings.shared.searchEngine.rawValue
+                    ).absoluteString
+            }
             viewModel.search(text)
             shouldKeepUrl = false
             searchBar.resignFirstResponder()
@@ -128,7 +136,7 @@ extension SearchBar: UISearchBarDelegate {
             Items.shared.setFilterText("")
         }
     }
-    
+
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         self.editing = false
         if shouldKeepUrl {
@@ -139,15 +147,15 @@ extension SearchBar: UISearchBarDelegate {
         // Reset filter text
         viewModel.setEnteredText("")
     }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         self.editing = true
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.setEnteredText(searchText)
     }
-    
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }

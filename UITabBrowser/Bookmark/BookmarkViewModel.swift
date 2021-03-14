@@ -5,13 +5,13 @@
 //  Created by ogaoga on 2021/02/11.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class BookmarkViewModel: ObservableObject {
 
     // MARK: - Enumerated type
-    
+
     enum Scope: Int, CaseIterable {
         case bookmark = 0
         case history = 1
@@ -27,11 +27,11 @@ class BookmarkViewModel: ObservableObject {
                 return NSLocalizedString("Search History", comment: "Scope title in bookmark view")
             }
         }
-        
+
         static var titles: [String] {
             return allCases.map { $0.title }
         }
-        
+
         var itemType: ItemType {
             switch self {
             case .bookmark:
@@ -43,45 +43,48 @@ class BookmarkViewModel: ObservableObject {
             }
         }
     }
-    
+
     // MARK: - Private properties
-    
+
     private var cancellables: Set<AnyCancellable> = []
 
     // MARK: - Published properties
-    
+
     @Published var scope: Scope = .bookmark
     @Published var enteredText = ""
     @Published var isDeleteAllButtonEnabled = true
 
     // MARK: - Initializer & deinitializer
-    
+
     init() {
         // DeleteAll button
         $scope
             .combineLatest(Items.shared.$items)
             .map { (scope, _) in
                 // TODO: fix this workaround
-                let items = Items.shared.getItems(type: scope.itemType, filterText: self.enteredText)
+                let items = Items.shared.getItems(
+                    type: scope.itemType,
+                    filterText: self.enteredText
+                )
                 return (scope == .history || scope == .search) && items.count > 0
             }
             .assign(to: &$isDeleteAllButtonEnabled)
     }
-    
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
-    
+
     // MARK: - Commands
-    
+
     func setScope(scope: Scope) {
         self.scope = scope
     }
-    
+
     func setEnteredText(_ text: String) {
         self.enteredText = text
     }
-    
+
     func deleteAll(scope: Scope) {
         let items = Items.shared
         switch scope {

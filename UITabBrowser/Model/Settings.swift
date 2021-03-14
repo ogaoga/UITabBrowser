@@ -5,14 +5,14 @@
 //  Created by ogaoga on 2021/02/16.
 //
 
-import Foundation
 import Combine
+import Foundation
 
 enum SearchEngine: String, CaseIterable {
     case google = "https://www.google.com/search?q="
     case yahoojp = "https://search.yahoo.co.jp/search?p="
     case bing = "https://www.bing.com/search?q="
-    
+
     var title: String {
         switch self {
         case .google:
@@ -23,26 +23,26 @@ enum SearchEngine: String, CaseIterable {
             return "Bing"
         }
     }
-    
+
     var urlPrefix: String {
         return self.rawValue
     }
-    
+
     static let defaultEngine: SearchEngine = .google
 }
 
 final class Settings {
     static let shared = Settings()
-    
+
     enum Key: String {
         case searchEngine = "SearchEngine"
         case onboarding = "Onboarding"
     }
-    
+
     private let userDefaults = UserDefaults.standard
 
     // MARK: - Properties
-    
+
     // Search Engine
     var searchEngine: SearchEngine {
         get {
@@ -97,7 +97,7 @@ final class Settings {
                 }
         }
     }
-    
+
     var onboarding: Bool {
         get {
             return userDefaults.bool(forKey: Key.onboarding.rawValue)
@@ -106,14 +106,14 @@ final class Settings {
             userDefaults.set(newValue, forKey: Key.onboarding.rawValue)
         }
     }
-    
+
     // MARK: - Initialize
-    
+
     init() {
         // Initialize
         userDefaults.register(defaults: [
             Key.searchEngine.rawValue: SearchEngine.defaultEngine.rawValue,
-            Key.onboarding.rawValue: false
+            Key.onboarding.rawValue: false,
         ])
     }
 }

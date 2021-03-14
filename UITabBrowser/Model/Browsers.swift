@@ -5,42 +5,38 @@
 //  Created by ogaoga on 2020/12/29.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 final class Browsers: NSObject, ObservableObject {
     static var shared = Browsers()
 
     private var cancellables: Set<AnyCancellable> = []
-    
+
     // Browsers
     @Published var browsers: [Browser] = []
     @Published var currentBrowser: Browser? = nil
     var viewControllers: [UIViewController] {
-        get {
-            return browsers.map { browser in
-                return browser.viewController
-            }
-        }
-    }
-    
-    // manage selected tab
-    
-    private var selectedIndex: Int {
-        get {
-            return browsers.firstIndex { $0.selected } ?? 0
+        return browsers.map { browser in
+            return browser.viewController
         }
     }
 
+    // manage selected tab
+
+    private var selectedIndex: Int {
+        return browsers.firstIndex { $0.selected } ?? 0
+    }
+
     @Published var selectedViewController: UIViewController? = nil
-    
+
     override init() {
         super.init()
         if Settings.shared.onboarding {
             initialize()
         }
     }
-    
+
     func initialize() {
         // Initialize with saved data
         browsers = Settings.shared.browsers.map {
@@ -50,7 +46,7 @@ final class Browsers: NSObject, ObservableObject {
         if browsers.count == 0 {
             appendSearch()
         }
-        
+
         // Save browsers
         $browsers
             .dropFirst()
@@ -58,27 +54,39 @@ final class Browsers: NSObject, ObservableObject {
             .debounce(for: 5, scheduler: DispatchQueue.main)
             .assign(to: \.browsers, on: Settings.shared)
             .store(in: &cancellables)
-        
+
         // Selected View Controller
         $browsers
-            .compactMap { $0.count > 0
-                ? $0.find(where: { $0.selected })?.viewController
-                : nil                
+            .compactMap {
+                $0.count > 0
+                    ? $0.find(where: { $0.selected })?.viewController
+                    : nil
             }
             .assign(to: &$selectedViewController)
     }
-    
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
-    
+
+    func browserOf(url: URL) -> Browser? {
+        if let index = browsers.lastIndex(where: { browser in
+            browser.url?.absoluteString == url.absoluteString
+        }) {
+            return browsers[index]
+        } else {
+            return nil
+        }
+    }
+
     func appendBrowser(urlString: String) {
         appendBrowsers(urlStrings: [urlString])
     }
-    
+
     func appendBrowsers(urlStrings: [String]) {
         // Delete except .browser and clear selected from existing browsers
-        let currentBrowsers: [Browser] = browsers
+        let currentBrowsers: [Browser] =
+            browsers
             // .filter { $0.type == .browser }
             .map {
                 $0.selected = false
@@ -96,21 +104,21 @@ final class Browsers: NSObject, ObservableObject {
         browsers = currentBrowsers + newBrowsers
         updateCurrentBrowser()
     }
-    
+
     func appendSearch() {
         let browser = Browser(type: .search)
         browser.delegate = self
         browsers.append(browser)
         selectLast()
     }
-    
+
     func insertBrowser(urlString: String) {
         let browser = Browser(type: .browser, urlString: urlString)
         browser.delegate = self
         browsers.insert(browser, at: selectedIndex + 1)
         select(index: selectedIndex + 1)
     }
-    
+
     func select(id: BrowserID) {
         // change selected
         browsers = browsers.map { browser in
@@ -122,15 +130,15 @@ final class Browsers: NSObject, ObservableObject {
     }
 
     private func select(index: Int) {
-        if index >= 0 && index < browsers.count  {
+        if index >= 0 && index < browsers.count {
             select(id: browsers[index].id)
         }
     }
-    
+
     private func selectLast() {
         select(index: browsers.count - 1)
     }
-    
+
     func delete(id: BrowserID) {
         let newSelected = selectedIndex == browsers.count - 1 ? selectedIndex - 1 : selectedIndex
         browsers = browsers.filter { $0.id != id }
@@ -139,7 +147,7 @@ final class Browsers: NSObject, ObservableObject {
         }
         select(index: newSelected)
     }
-    
+
     func deleteAll(includePinned: Bool = false) {
         // Save current browser to keep it as much as possible
         let currentId = browsers.find(where: { $0.selected })?.id
@@ -160,7 +168,7 @@ final class Browsers: NSObject, ObservableObject {
             selectLast()
         }
     }
-    
+
     func getSearchViewID() -> BrowserID? {
         if let index = browsers.firstIndex(where: { $0.type == .search }) {
             return browsers[index].id
@@ -168,7 +176,7 @@ final class Browsers: NSObject, ObservableObject {
             return nil
         }
     }
-    
+
     func showSearch() {
         if let id = getSearchViewID() {
             // move to search
@@ -178,19 +186,19 @@ final class Browsers: NSObject, ObservableObject {
             appendSearch()
         }
     }
-    
+
     func reload(id: BrowserID) {
         if let browser = get(id: id) {
             browser.reload()
         }
     }
-    
+
     func openURL(id: BrowserID, url: URL) {
         if let browser = get(id: id) {
             browser.openURL(url: url)
         }
     }
-    
+
     func setPin(id: BrowserID, pinned: Bool) {
         if let selectedBrowser = get(id: id) {
             // Pin selected tab
@@ -217,7 +225,7 @@ final class Browsers: NSObject, ObservableObject {
             }
         }
     }
-    
+
     func get(id: BrowserID) -> Browser? {
         return browsers.find { $0.id == id }
     }
@@ -227,7 +235,7 @@ final class Browsers: NSObject, ObservableObject {
         // Update browsers
         browsers = browsers.map { $0 }
     }
-    
+
     // Update current browser to trigger subscribers
     private func updateCurrentBrowser() {
         if let browser = browsers.find(where: { $0.selected }) {

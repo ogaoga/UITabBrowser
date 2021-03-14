@@ -5,8 +5,8 @@
 //  Created by ogaoga on 2020/12/31.
 //
 
-import CoreData
 import Combine
+import CoreData
 import UIKit
 
 typealias ItemID = UUID
@@ -34,9 +34,9 @@ struct Item: Hashable {
 final class Items: ObservableObject {
     // Singleton
     static let shared = Items()
-    
+
     let entityName = "ItemEntity"
-    
+
     // MARK: - Private properties
 
     private var viewContext: NSManagedObjectContext! = nil
@@ -48,25 +48,28 @@ final class Items: ObservableObject {
     @Published var items: [Item] = []
 
     // MARK: - Commands
-    
+
     func setType(_ type: ItemType) {
         self.itemType = type
     }
-    
+
     func setFilterText(_ text: String) {
         self.filterText = text
     }
 
     // MARK: - Initializer & Deinitializer
-    
+
     init() {
         // Initialize Core Data
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         viewContext = appDelegate.persistentContainer.viewContext
-        
+
         // Subscribe
         NotificationCenter.default
-            .publisher(for: NSManagedObjectContext.didChangeObjectsNotification, object: viewContext)
+            .publisher(
+                for: NSManagedObjectContext.didChangeObjectsNotification,
+                object: viewContext
+            )
             .compactMap { $0.object as? NSManagedObjectContext }
             .compactMap { context in
                 return self.getItems(type: self.itemType, filterText: self.filterText)
@@ -81,7 +84,7 @@ final class Items: ObservableObject {
             }
             .assign(to: &$items)
     }
-        
+
     // MARK: - Core Data
 
     // get items from Core Data
@@ -92,7 +95,8 @@ final class Items: ObservableObject {
         fetchRequest.returnsDistinctResults = true
         fetchRequest.propertiesToFetch = ["title"]
         // Sort
-        let sortDescripter = type == .tab
+        let sortDescripter =
+            type == .tab
             ? NSSortDescriptor(key: "order", ascending: true)
             : NSSortDescriptor(key: "created", ascending: false)
         fetchRequest.sortDescriptors = [sortDescripter]
@@ -125,7 +129,7 @@ final class Items: ObservableObject {
             return []
         }
     }
-    
+
     private func getEntity<T: NSManagedObject>(of id: ItemID, entityName: String) -> T? {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
         fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
@@ -141,7 +145,7 @@ final class Items: ObservableObject {
             return nil
         }
     }
-    
+
     func add(
         type: ItemType,
         title: String,
@@ -162,13 +166,15 @@ final class Items: ObservableObject {
             // Same keywords will be overwritten with new one
             fetchRequest.predicate = NSPredicate(
                 format: "keywords == %@ AND type == %@",
-                keywords, type.rawValue
+                keywords,
+                type.rawValue
             )
         default:
             // Same URL record will be overwritten with new one
             fetchRequest.predicate = NSPredicate(
                 format: "url == %@ AND type == %@",
-                url.absoluteString, type.rawValue
+                url.absoluteString,
+                type.rawValue
             )
         }
         do {
@@ -183,14 +189,18 @@ final class Items: ObservableObject {
                 entity.browserId = browserId
             } else {
                 // Add a new record
-                let entity = NSEntityDescription.entity(forEntityName: entityName,
-                                                        in: viewContext)!
-                let item = NSManagedObject(entity: entity,
-                                           insertInto: viewContext)
+                let entity = NSEntityDescription.entity(
+                    forEntityName: entityName,
+                    in: viewContext
+                )!
+                let item = NSManagedObject(
+                    entity: entity,
+                    insertInto: viewContext
+                )
                 // set
                 item.setValuesForKeys([
                     "created": Date(),
-                    "id": UUID(), // ItemID
+                    "id": UUID(),  // ItemID
                     "keywords": keywords,
                     "title": title,
                     "type": type.rawValue,
@@ -198,7 +208,7 @@ final class Items: ObservableObject {
                     "browserId": browserId,
                     "selected": selected,
                     "pinned": pinned,
-                    "order": order ?? 0
+                    "order": order ?? 0,
                 ])
             }
             // Save
@@ -208,7 +218,7 @@ final class Items: ObservableObject {
             print("Could not save. \(error), \(error.userInfo)")
         }
     }
-    
+
     func delete(id: ItemID) {
         if let itemEntity = getEntity(of: id, entityName: entityName) {
             viewContext.delete(itemEntity)
@@ -221,7 +231,7 @@ final class Items: ObservableObject {
             print("Couldn't get itemEntity of \(id)")
         }
     }
-    
+
     func deleteAll(itemType: ItemType? = nil) {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
         fetchRequest.resultType = .managedObjectResultType
@@ -243,7 +253,7 @@ final class Items: ObservableObject {
             print(error)
         }
     }
-    
+
     func item(of id: ItemID) -> Item? {
         // TODO: search from CoreData instead of items
         return items.find(where: { $0.id == id })

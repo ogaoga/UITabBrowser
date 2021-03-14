@@ -5,9 +5,9 @@
 //  Created by ogaoga on 2020/12/29.
 //
 
+import Combine
 import UIKit
 import WebKit
-import Combine
 
 // Protocol for delegate
 
@@ -21,11 +21,11 @@ extension BrowserDelegate {
 
 typealias BrowserID = UUID
 
-enum URLSchema: String, CaseIterable  {
+enum URLSchema: String, CaseIterable {
     case tel = "tel"
     case mailto = "mailto"
     case apps = "itms-appss"
-    
+
     static var urlSchemas: [String] {
         self.allCases.map { $0.rawValue }
     }
@@ -53,9 +53,9 @@ class Browser {
     var offset = CGPoint(x: 0.0, y: 0.0)
     var velocity = CGPoint(x: 0.0, y: 0.0)
     var isContentLoaded = false
-    
+
     @Published private var faviconLoader: FaviconLoader = FaviconLoader()
-    
+
     // delegate
     weak var delegate: BrowserDelegate?
 
@@ -64,8 +64,14 @@ class Browser {
 
     // Combine
     private var cancellables: Set<AnyCancellable> = []
-    
-    init(type: PageType, urlString: String? = nil, title: String = "", selected: Bool = false, pinned: Bool = false) {
+
+    init(
+        type: PageType,
+        urlString: String? = nil,
+        title: String = "",
+        selected: Bool = false,
+        pinned: Bool = false
+    ) {
         self.type = type
         self.selected = selected
         self.pinned = pinned
@@ -85,11 +91,12 @@ class Browser {
         case .search:
             // Search Result
             let storyboard = UIStoryboard(name: "SearchResults", bundle: nil)
-            searchResultController = storyboard.instantiateInitialViewController() as? SearchResultsController
+            searchResultController =
+                storyboard.instantiateInitialViewController() as? SearchResultsController
             searchResultController?.initialItemType = .keywords
             self.viewController = searchResultController
         }
-        
+
         // Observe url to fetch favicon
         $url
             .compactMap { $0 }
@@ -99,7 +106,7 @@ class Browser {
                 self.faviconLoader.request(url: url)
             })
             .store(in: &cancellables)
-        
+
         // Observe favicon
         faviconLoader.$image
             .receive(on: DispatchQueue.main)
@@ -107,7 +114,7 @@ class Browser {
                 self?.favicon = $0
             })
             .store(in: &cancellables)
-        
+
         // load the page if the tab selected
         $selected
             .compactMap {
@@ -124,15 +131,15 @@ class Browser {
             }
             .store(in: &cancellables)
     }
-    
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
-    
+
     private func update() {
         delegate?.didUpdate(self)
     }
-    
+
     func openURL(url: URL) {
         if let vc = self.viewController {
             switch vc {
@@ -154,15 +161,16 @@ class Browser {
             }
         }
     }
-    
+
     func scrollToTop() {
         if let vc = self.viewController, vc is WebViewController {
             (vc as! WebViewController).webView.scrollView.setContentOffset(
-                CGPoint(x: 0.0, y: 0.0), animated: true
+                CGPoint(x: 0.0, y: 0.0),
+                animated: true
             )
         }
     }
-    
+
     func reload() {
         if let vc = self.viewController, type == .browser {
             if let webView = (vc as! WebViewController).webView {
@@ -177,36 +185,40 @@ extension Browser: WebViewControllerDelegate {
         self.title = title
         update()
     }
-    
+
     func webViewController(_ viewController: WebViewController, didURLUpdate url: URL) {
         self.url = url
         update()
     }
-    
+
     func webViewController(_ viewController: WebViewController, didLoadingUpdate loading: Bool) {
         self.loading = loading
         update()
     }
-    
+
     func webViewController(_ viewController: WebViewController, didProgressUpdate progress: Float) {
         self.progress = progress
         update()
     }
-    
-    func webViewController(_ viewController: WebViewController, didCanGoBackUpdate canGoBack: Bool) {
+
+    func webViewController(_ viewController: WebViewController, didCanGoBackUpdate canGoBack: Bool)
+    {
         self.canGoBack = canGoBack
         update()
     }
-    
-    func webViewController(_ viewController: WebViewController, didCanGoForwardUpdate canGoForward: Bool) {
+
+    func webViewController(
+        _ viewController: WebViewController,
+        didCanGoForwardUpdate canGoForward: Bool
+    ) {
         self.canGoForward = canGoForward
         update()
     }
-    
+
     func webViewController(_ viewController: WebViewController, openNewTab url: URL) {
         Browsers.shared.insertBrowser(urlString: url.absoluteString)
     }
-    
+
     func webViewController(_ viewController: WebViewController, didScroll offset: CGPoint) {
         self.offset = offset
         update()
@@ -215,16 +227,20 @@ extension Browser: WebViewControllerDelegate {
     func webViewController(_ viewController: WebViewController, WillEndDragging velocity: CGPoint) {
         self.velocity = velocity
     }
-    
+
     func webViewControllerDidFinishNavigation(_ viewController: WebViewController) {
         // Save history
         if let webView = viewController.webView, let url = webView.url, let title = webView.title {
             Items.shared.add(
-                type: .history, title: title, url: url, keywords: "", browserId: id
+                type: .history,
+                title: title,
+                url: url,
+                keywords: "",
+                browserId: id
             )
         }
     }
-    
+
     func webViewController(_ viewController: WebViewController, openExternalApp url: URL) {
         // Close myself if App Store is launched
         if url.absoluteString.starts(with: "itms-appss") {
