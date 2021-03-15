@@ -5,15 +5,15 @@
 //  Created by ogaoga on 2020/12/27.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class BrowsersViewController: UIPageViewController {
 
     private let viewModel = BrowsersViewModel()
 
     // MARK: - Initializers
-    
+
     init() {
         // Initialize
         super.init(
@@ -21,24 +21,24 @@ class BrowsersViewController: UIPageViewController {
             navigationOrientation: .horizontal,
             options: [:]
         )
-        
+
         // Set data source
         dataSource = viewModel
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 
     // MARK: - Combine
-    
+
     private var cancellables: Set<AnyCancellable> = []
     deinit {
         cancellables.forEach { $0.cancel() }
     }
-    
+
     // MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -46,7 +46,7 @@ class BrowsersViewController: UIPageViewController {
         let scrollView = (view.subviews[0] as! UIScrollView)
         scrollView.bounces = false
         scrollView.scrollsToTop = false
-        
+
         // Subscribe changing tab
         viewModel.$selectedViewController
             .compactMap { $0 }

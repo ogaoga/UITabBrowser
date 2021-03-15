@@ -5,13 +5,13 @@
 //  Created by ogaoga on 2021/01/31.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class BrowsersViewModel: NSObject, ObservableObject {
 
     // MARK: - properties
-    
+
     @Published private var selectedIndex = 0 {
         willSet {
             lastSelected = selectedIndex
@@ -19,21 +19,19 @@ class BrowsersViewModel: NSObject, ObservableObject {
     }
     private var lastSelected = 0
     var direction: UIPageViewController.NavigationDirection {
-        get {
-            return selectedIndex - lastSelected >= 0 ? .forward : .reverse
-        }
+        return selectedIndex - lastSelected >= 0 ? .forward : .reverse
     }
-    
+
     @Published var selectedViewController: UIViewController? = nil
-    
+
     private let browsers = Browsers.shared
     private var cancellables: Set<AnyCancellable> = []
 
     // MARK: - initializer / deinitializer
-    
+
     override init() {
         super.init()
-        
+
         // Subscribe selected
         browsers.$browsers
             .map { browsers in
@@ -42,14 +40,14 @@ class BrowsersViewModel: NSObject, ObservableObject {
             .removeDuplicates()
             .sink(receiveValue: { [weak self] in self?.selectedIndex = $0 })
             .store(in: &cancellables)
-        
+
         // Selected View Controller
         browsers.$selectedViewController
             .removeDuplicates()
             .sink { [weak self] in self?.selectedViewController = $0 }
             .store(in: &cancellables)
     }
-    
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
@@ -58,10 +56,16 @@ class BrowsersViewModel: NSObject, ObservableObject {
 // MARK: - data source
 
 extension BrowsersViewModel: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerBefore viewController: UIViewController
+    ) -> UIViewController? {
         return nil
     }
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    func pageViewController(
+        _ pageViewController: UIPageViewController,
+        viewControllerAfter viewController: UIViewController
+    ) -> UIViewController? {
         return nil
     }
     func presentationCount(for pageViewController: UIPageViewController) -> Int {

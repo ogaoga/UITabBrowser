@@ -6,28 +6,28 @@
 //
 //  The original code is in the project "ImplementingModernCollectionViews"
 
-import UIKit
 import Combine
+import UIKit
 
 let RADIUS: CGFloat = 6.0
 
 class TabsViewController: UIViewController {
     typealias Section = TabsViewModel.Section
-    
+
     private let viewModel = TabsViewModel()
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Tab>!
-    
+
     private var cancellables: Set<AnyCancellable> = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // initializing
         configureHierarchy()
         configureDataSource()
         applyInitialSnapshots()
-        
+
         // subscribe tabs
         viewModel.$tabs
             .removeDuplicates()
@@ -39,7 +39,7 @@ class TabsViewController: UIViewController {
                 self.dataSource.apply(recentsSnapshot, to: .tabs, animatingDifferences: true)
             }
             .store(in: &cancellables)
-        
+
         // subscribe selected to scroll to the selected tab
         viewModel.$selectedIndex
             .removeDuplicates()
@@ -57,7 +57,7 @@ class TabsViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
-    
+
     deinit {
         view.subviews.forEach { $0.removeFromSuperview() }
         cancellables.forEach { $0.cancel() }
@@ -65,7 +65,7 @@ class TabsViewController: UIViewController {
 }
 
 extension TabsViewController {
-    
+
     func configureHierarchy() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: createLayout())
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -77,32 +77,44 @@ extension TabsViewController {
         collectionView.scrollsToTop = false
         view.addSubview(collectionView)
     }
-    
+
     func createLayout() -> UICollectionViewLayout {
-        
-        let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+
+        let sectionProvider = {
+            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment)
+                -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0)
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1.0)
             )
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(
-                top: -1.0 * RADIUS, leading: 2.0, bottom: 1.0, trailing: 2.0
+                top: -1.0 * RADIUS,
+                leading: 2.0,
+                bottom: 1.0,
+                trailing: 2.0
             )
             let groupSize = NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.3), heightDimension: .fractionalHeight(1.0)
+                widthDimension: .fractionalWidth(0.3),
+                heightDimension: .fractionalHeight(1.0)
             )
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0.0, leading: 3.0, bottom: 2.0, trailing: 3.0)
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 0.0,
+                leading: 3.0,
+                bottom: 2.0,
+                trailing: 3.0
+            )
             return section
         }
         return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         if let indexPath = self.collectionView.indexPathsForSelectedItems?.first {
             if let coordinator = self.transitionCoordinator {
                 coordinator.animate(alongsideTransition: { context in
@@ -110,7 +122,9 @@ extension TabsViewController {
                 }) { (context) in
                     if context.isCancelled {
                         self.collectionView.selectItem(
-                            at: indexPath, animated: false, scrollPosition: []
+                            at: indexPath,
+                            animated: false,
+                            scrollPosition: []
                         )
                     }
                 }
@@ -119,32 +133,36 @@ extension TabsViewController {
             }
         }
     }
-    
+
     func configuredGridCell() -> UICollectionView.CellRegistration<TabCell, Tab> {
         return UICollectionView.CellRegistration<TabCell, Tab> { (cell, indexPath, tab) in
-            cell.titleLabel.text = tab.title.isEmpty
+            cell.titleLabel.text =
+                tab.title.isEmpty
                 ? NSLocalizedString("Loading...", comment: "in Tab")
                 : tab.title
             cell.imageView.image = tab.pinned ? UIImage(systemName: "pin.fill") : tab.favicon
             cell.imageView.isHidden = tab.loading
             cell.isActivityAnimating = tab.loading
             cell.isSelected = tab.active
-            
+
             // Background
             var background = UIBackgroundConfiguration.listPlainCell()
             background.cornerRadius = RADIUS
             background.strokeColor = .systemGray3
             background.strokeWidth = 1.0 / cell.traitCollection.displayScale
-            background.backgroundColor = tab.active
+            background.backgroundColor =
+                tab.active
                 ? UIColor.systemBackground
                 : UIColor.systemGray5
             cell.backgroundConfiguration = background
         }
     }
-    
+
     func configureDataSource() {
         // data source
-        dataSource = UICollectionViewDiffableDataSource<Section, Tab>(collectionView: collectionView) {
+        dataSource = UICollectionViewDiffableDataSource<Section, Tab>(
+            collectionView: collectionView
+        ) {
             (collectionView, indexPath, tab) -> TabCell? in
             return collectionView.dequeueConfiguredReusableCell(
                 using: self.configuredGridCell(),
@@ -153,7 +171,7 @@ extension TabsViewController {
             )
         }
     }
-    
+
     func applyInitialSnapshots() {
         // apply sections
         var snapshot = NSDiffableDataSourceSnapshot<Section, Tab>()
@@ -276,7 +294,8 @@ extension TabsViewController {
                 self.viewModel.setPin(id: tab.id, pinned: false)
             }
             // Define menu items
-            let children = tab.type == .browser
+            let children =
+                tab.type == .browser
                 ? [
                     closeAction,
                     shareAction,
@@ -284,7 +303,7 @@ extension TabsViewController {
                     openNewTabAction,
                     tab.pinned ? unpinAction : pinAction,
                     reloadAction,
-                    bookmarkAction
+                    bookmarkAction,
                 ]
                 : [closeAction]
             // Show menu
@@ -295,8 +314,10 @@ extension TabsViewController {
                 children: children
             )
         }
-        return UIContextMenuConfiguration(identifier: nil,
-                                          previewProvider: nil,
-                                          actionProvider: actionProvider)
+        return UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil,
+            actionProvider: actionProvider
+        )
     }
 }

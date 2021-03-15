@@ -5,11 +5,11 @@
 //  Created by ogaoga on 2021/01/22.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class TabsViewModel: ObservableObject {
-    
+
     @Published var tabs: [Tab] = []
     @Published var selectedIndex: Int = 0
 
@@ -18,7 +18,7 @@ class TabsViewModel: ObservableObject {
     enum Section: CaseIterable {
         case tabs
     }
-    
+
     init() {
         // subscribe browsers
         browsers.$browsers
@@ -49,7 +49,7 @@ class TabsViewModel: ObservableObject {
                             title: NSLocalizedString("Search", comment: "in tab of search"),
                             url: nil,
                             favicon: UIImage(systemName: "magnifyingglass"),
-                            active:  browser.selected,
+                            active: browser.selected,
                             loading: false,
                             pinned: false
                         )
@@ -66,15 +66,15 @@ extension TabsViewModel {
             browsers.select(id: tabs[index].id)
         }
     }
-    
+
     func delete(id: BrowserID) {
         browsers.delete(id: id)
     }
-    
+
     func reload(id: BrowserID) {
         browsers.reload(id: id)
     }
-    
+
     func bookmark(url: URL, title: String, browserId: BrowserID) {
         Items.shared.add(
             type: .bookmark,
@@ -84,11 +84,11 @@ extension TabsViewModel {
             browserId: browserId
         )
     }
-    
+
     func openNewTab(url: URL) {
         browsers.insertBrowser(urlString: url.absoluteString)
     }
-    
+
     func setPin(id: BrowserID, pinned: Bool) {
         if let browser = tabs.find(where: { $0.id == id }) {
             browsers.setPin(id: browser.id, pinned: pinned)

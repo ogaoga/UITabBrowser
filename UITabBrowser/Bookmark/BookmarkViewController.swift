@@ -5,26 +5,26 @@
 //  Created by ogaoga on 2021/02/11.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class BookmarkViewController: UIViewController {
 
     typealias Scope = BookmarkViewModel.Scope
-    
+
     // MARK: - Private properties
-    
+
     private let viewModel = BookmarkViewModel()
     private var cancellables: Set<AnyCancellable> = []
     private var searchResultsController: SearchResultsController? = nil
 
     // MARK: - Outlet
-    
+
     @IBOutlet weak var deleteAllButton: UIBarButtonItem!
     @IBOutlet weak var doneButton: UIBarButtonItem!
-    
+
     // MARK: - Action
-    
+
     @IBAction func comfirmDeleteAll(_ sender: Any) {
         // Show action sheet
         let alert = UIAlertController(
@@ -67,14 +67,14 @@ class BookmarkViewController: UIViewController {
             Items.shared.setType(.keywords)
         }
     }
-    
+
     // MARK: - Lifecycle methods
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureSearchController()
-        
+
         // Title
         viewModel.$scope
             .receive(on: DispatchQueue.main)
@@ -89,7 +89,7 @@ class BookmarkViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .assign(to: \.isEnabled, on: deleteAllButton)
             .store(in: &cancellables)
-        
+
         // Query
         viewModel.$scope
             .combineLatest(viewModel.$enteredText)
@@ -112,13 +112,13 @@ class BookmarkViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
-    
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
 
     // MARK: - Configurations
-    
+
     private func configureSearchController() {
         let searchController = UISearchController(
             searchResultsController: nil
@@ -173,6 +173,31 @@ extension BookmarkViewController: UISearchBarDelegate {
 
 extension BookmarkViewController: SearchResultsControllerDelegate {
     func searchResultsController(_ controller: SearchResultsController, didSelect item: Item) {
+        // Dismiss
+        dismiss(animated: true) {
+            // Open selected
+            let browsers = Browsers.shared
+            guard let currentBrowser = browsers.currentBrowser else {
+                return
+            }
+            let url = item.url
+            if let browser = browsers.browserOf(url: url) {
+                // Close if the current tab is search view
+                if currentBrowser.type == .search {
+                    browsers.delete(id: currentBrowser.id)
+                }
+                // Select the tab
+                browsers.select(id: browser.id)
+            } else {
+                if currentBrowser.type == .search {
+                    // open in the current tab
+                    currentBrowser.openURL(url: item.url)
+                } else {
+                    // open new tab
+                    browsers.appendBrowser(urlString: url.absoluteString)
+                }
+            }
+        }
         // Add the item to keywords
         if item.type == .keywords {
             Items.shared.add(
@@ -182,15 +207,6 @@ extension BookmarkViewController: SearchResultsControllerDelegate {
                 keywords: item.keywords,
                 browserId: item.browserId
             )
-        }
-        // Dismiss
-        dismiss(animated: true) {
-            // Open selected
-            let browsers = Browsers.shared
-            if let current = browsers.currentBrowser, current.type == .search {
-                browsers.delete(id: current.id)
-            }
-            browsers.insertBrowser(urlString: item.url.absoluteString)
         }
     }
 }

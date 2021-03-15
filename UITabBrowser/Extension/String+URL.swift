@@ -14,7 +14,7 @@ extension String {
     func urlEncode() -> String {
         return self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
     }
-    
+
     // Return valid URL
     func validURL() -> URL? {
         if !self.contains(".") {
@@ -32,16 +32,16 @@ extension String {
             return nil
         }
     }
-    
+
     // Check if the scheme is HTTPS
     var isSecureURL: Bool {
         return self.lowercased().starts(with: "https://")
     }
-    
+
     var isURL: Bool {
         return self.validURL() != nil
     }
-    
+
     func searchURL(searchURLPrefix: String) -> URL {
         let lowercasedText = self.lowercased()
         if let url = lowercasedText.validURL() {

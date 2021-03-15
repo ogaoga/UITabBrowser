@@ -5,11 +5,11 @@
 //  Created by ogaoga on 2021/02/15.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 class SearchEngineViewController: UITableViewController {
-    
+
     // MARK: - Private properties
 
     private let viewModel = SettingsViewModel.shared
@@ -17,7 +17,7 @@ class SearchEngineViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         viewModel.$searchEngine
             .receive(on: DispatchQueue.main)
             .sink { _ in
@@ -25,11 +25,11 @@ class SearchEngineViewController: UITableViewController {
             }
             .store(in: &cancellables)
     }
-    
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
-    
+
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -40,7 +40,9 @@ class SearchEngineViewController: UITableViewController {
         return SearchEngine.allCases.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath)
+        -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchEngineCell", for: indexPath)
 
         let engine = SearchEngine.allCases[indexPath.row]

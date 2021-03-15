@@ -8,7 +8,7 @@
 import UIKit
 
 class KeyboardBarViewController: UIViewController {
-        
+
     @IBAction func cancelTextInput(_ sender: Any) {
         UIApplication.shared.sendAction(
             #selector(UIResponder.resignFirstResponder),
@@ -17,7 +17,7 @@ class KeyboardBarViewController: UIViewController {
             for: nil
         )
     }
-    
+
     @IBAction func pasteText(_ sender: Any) {
         UIApplication.shared.sendAction(
             #selector(UIResponder.paste(_:)),

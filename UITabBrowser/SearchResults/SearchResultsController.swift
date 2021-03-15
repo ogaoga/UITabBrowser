@@ -5,8 +5,8 @@
 //  Created by ogaoga on 2021/02/06.
 //
 
-import UIKit
 import Combine
+import UIKit
 
 // Delegate protocol
 protocol SearchResultsControllerDelegate: AnyObject {
@@ -23,7 +23,7 @@ class SearchResultsController: UIViewController {
     // Section
     typealias Section = SearchResultsViewModel.Section
     typealias Row = SearchResultsViewModel.Row
-    
+
     // View Model
     private var viewModel: SearchResultsViewModel!
 
@@ -33,18 +33,18 @@ class SearchResultsController: UIViewController {
 
     // For Combine
     private var cancellables: Set<AnyCancellable> = []
-    
+
     // Delegate
     var delegate: SearchResultsControllerDelegate? = nil
-    
+
     // Outlet
     @IBOutlet weak var listView: UIView!
     @IBOutlet weak var messageView: UIView!
     @IBOutlet weak var zeroItemMessage: UILabel!
-    
+
     // Property
     var initialItemType: ItemType = .keywords
-        
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,11 +55,11 @@ class SearchResultsController: UIViewController {
         if delegate == nil {
             delegate = self
         }
-        
+
         // Collection View
         configureHierarchy()
         configureDataSource()
-        
+
         // Subscribe rows
         viewModel.$rows
             .receive(on: DispatchQueue.main)
@@ -73,7 +73,7 @@ class SearchResultsController: UIViewController {
                 self?.listView.isHidden = rows.count == 0
             }
             .store(in: &cancellables)
-        
+
         viewModel.$itemType
             .receive(on: DispatchQueue.main)
             .map {
@@ -102,7 +102,7 @@ class SearchResultsController: UIViewController {
             }
             .store(in: &cancellables)
     }
-    
+
     deinit {
         cancellables.forEach { $0.cancel() }
     }
@@ -129,14 +129,18 @@ extension SearchResultsController {
         return UICollectionViewCompositionalLayout.list(using: config)
     }
     private func configureHierarchy() {
-        collectionView = UICollectionView(frame: listView.bounds, collectionViewLayout: createLayout())
+        collectionView = UICollectionView(
+            frame: listView.bounds,
+            collectionViewLayout: createLayout()
+        )
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
         collectionView.delegate = self
         listView.addSubview(collectionView)
     }
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Row> { (cell, indexPath, row) in
+        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Row> {
+            (cell, indexPath, row) in
             // Content
             var content = cell.defaultContentConfiguration()
             content.text = row.text
@@ -154,9 +158,16 @@ extension SearchResultsController {
             // Accessaries
             cell.accessories = []
         }
-        diffableDataSource = UICollectionViewDiffableDataSource<Section, Row>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: Row) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+        diffableDataSource = UICollectionViewDiffableDataSource<Section, Row>(
+            collectionView: collectionView
+        ) {
+            (collectionView: UICollectionView, indexPath: IndexPath, identifier: Row)
+                -> UICollectionViewCell? in
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration,
+                for: indexPath,
+                item: identifier
+            )
         }
     }
 }
