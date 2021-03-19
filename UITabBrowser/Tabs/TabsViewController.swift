@@ -140,10 +140,17 @@ extension TabsViewController {
                 tab.title.isEmpty
                 ? NSLocalizedString("Loading...", comment: "in Tab")
                 : tab.title
-            cell.imageView.image = tab.pinned ? UIImage(systemName: "pin.fill") : tab.favicon
+            cell.imageView.image = tab.favicon
             cell.imageView.isHidden = tab.loading
             cell.isActivityAnimating = tab.loading
             cell.isSelected = tab.active
+            if tab.privateMode {
+                cell.iconType = .privateMode
+            } else if tab.pinned {
+                cell.iconType = .pinned
+            } else {
+                cell.iconType = .none
+            }
 
             // Background
             var background = UIBackgroundConfiguration.listPlainCell()
@@ -262,7 +269,7 @@ extension TabsViewController {
                 attributes: []
             ) { _ in
                 if let url = tab.url {
-                    self.viewModel.openNewTab(url: url)
+                    self.viewModel.openNewTab(url: url, privateMode: tab.privateMode)
                 }
             }
             // Open in default browser
@@ -282,7 +289,7 @@ extension TabsViewController {
             let pinAction = UIAction(
                 title: NSLocalizedString("Pin", comment: "in Tab's context menu"),
                 image: UIImage(systemName: "pin"),
-                attributes: []
+                attributes: tab.privateMode ? [.disabled] : []
             ) { _ in
                 self.viewModel.setPin(id: tab.id, pinned: true)
             }
@@ -293,6 +300,16 @@ extension TabsViewController {
             ) { _ in
                 self.viewModel.setPin(id: tab.id, pinned: false)
             }
+            // Private mode
+            /*
+            let privateAction = UIAction(
+                title: NSLocalizedString("Private Browse", comment: "in Tab's context menu"),
+                image: UIImage(systemName: "lock.shield"),
+                attributes: tab.privateMode || tab.pinned ? [.disabled] : []
+            ) { _ in
+                self.viewModel.setPrivateMode(id: tab.id)
+            }
+             */
             // Define menu items
             let children =
                 tab.type == .browser
@@ -302,6 +319,7 @@ extension TabsViewController {
                     openDefaultBrowserAction,
                     openNewTabAction,
                     tab.pinned ? unpinAction : pinAction,
+                    // privateAction,
                     reloadAction,
                     bookmarkAction,
                 ]

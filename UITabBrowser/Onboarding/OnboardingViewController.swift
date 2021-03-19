@@ -13,6 +13,14 @@ class OnboardingViewController: UIViewController {
     private var pages: [UIViewController] = []
     private var pageViewController: UIPageViewController! = nil
     private var cancellables: Set<AnyCancellable> = []
+    private let pageNames = [
+        "View1",
+        "View2",
+        "ViewPrivateBrowse",
+        "View3",
+        "View4",
+        "View5",
+    ]
 
     @Published private var index = 0
 
@@ -102,8 +110,8 @@ class OnboardingViewController: UIViewController {
 
         // Add view controllers
         let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        pages = (1...5).map {
-            storyboard.instantiateViewController(withIdentifier: "View\($0)")
+        pages = pageNames.map {
+            storyboard.instantiateViewController(withIdentifier: $0)
         }
         pageViewController.setViewControllers(
             [pages[0]],

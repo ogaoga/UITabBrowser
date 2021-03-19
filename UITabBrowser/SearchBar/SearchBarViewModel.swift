@@ -16,6 +16,19 @@ class SearchBarViewModel: NSObject {
     @Published var keywords: String = ""
     @Published var currentBrowser: Browser? = nil
     @Published var isSearch = false
+    @Published var privateMode = false
+    @Published var iconType: IconType = .Magnifyingglass
+
+    enum IconType: String {
+        case Magnifyingglass = "magnifyingglass"
+        case LockShieldFill = "lock.shield"
+        case LockFill = "lock.fill"
+        case LockSlash = "lock.slash"
+        case ShieldFill = "shield.slash"
+        var name: String {
+            return self.rawValue
+        }
+    }
 
     override init() {
         super.init()
@@ -25,13 +38,42 @@ class SearchBarViewModel: NSObject {
         browsers.$currentBrowser
             .assign(to: &$currentBrowser)
 
-        browsers.$currentBrowser
+        $currentBrowser
             .map { $0?.url }
+            .removeDuplicates()
             .assign(to: &$url)
 
-        browsers.$currentBrowser
+        $currentBrowser
             .map { $0?.type == .some(.search) }
+            .removeDuplicates()
             .assign(to: &$isSearch)
+
+        $currentBrowser
+            .map { $0?.privateMode ?? false }
+            .removeDuplicates()
+            .assign(to: &$privateMode)
+
+        $url
+            .combineLatest($privateMode)
+            .combineLatest($isSearch)
+            .map {
+                let (url, privateMode) = $0
+                let isSearch = $1
+                if isSearch {
+                    return .Magnifyingglass
+                } else {
+                    if let url = url {
+                        if url.absoluteString.isSecureURL {
+                            return privateMode ? .LockShieldFill : .LockFill
+                        } else {
+                            return privateMode ? .ShieldFill : .LockSlash
+                        }
+                    } else {
+                        return .Magnifyingglass
+                    }
+                }
+            }
+            .assign(to: &$iconType)
 
         NotificationCenter.default
             .publisher(for: SetTextInSearchBarNotification)
@@ -44,7 +86,7 @@ class SearchBarViewModel: NSObject {
         openURL(url: url)
         if !text.isURL {
             // Save keywords
-            if let currentBrowser = currentBrowser {
+            if let currentBrowser = currentBrowser, !currentBrowser.privateMode {
                 items.add(
                     type: .keywords,
                     title: text,
@@ -52,8 +94,6 @@ class SearchBarViewModel: NSObject {
                     keywords: text,
                     browserId: currentBrowser.id
                 )
-            } else {
-                print("Exception")
             }
         }
     }
@@ -65,18 +105,19 @@ class SearchBarViewModel: NSObject {
         let sharedBrowsers = Browsers.shared
         if currentBrowser.type == .search {
             // if same url tab exists...
-            if let browser = Browsers.shared.browserOf(url: url) {
+            if let browser = Browsers.shared.browserOf(url: url), !currentBrowser.privateMode {
                 // move to the tab
                 sharedBrowsers.select(id: browser.id)
+                // close search view
+                if let searchViewID = sharedBrowsers.getSearchViewID() {
+                    sharedBrowsers.delete(id: searchViewID)
+                }
             } else {
-                // open a new tab
-                Browsers.shared.appendBrowser(urlString: url.absoluteString)
-            }
-            // Close search view
-            if let searchViewID = sharedBrowsers.getSearchViewID() {
-                sharedBrowsers.delete(id: searchViewID)
+                // open
+                currentBrowser.openURL(url: url)
             }
         } else {
+            // open
             currentBrowser.openURL(url: url)
         }
     }

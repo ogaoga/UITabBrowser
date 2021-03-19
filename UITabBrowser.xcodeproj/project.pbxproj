@@ -10,14 +10,16 @@
 		A9014E3625C1B37700866F3A /* Browser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9014E3525C1B37700866F3A /* Browser.swift */; };
 		A91E73A825E7F73C00418F1E /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E73A625E7F73C00418F1E /* OnboardingViewController.swift */; };
 		A91E73B425E8030200418F1E /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91E73B325E8030200418F1E /* SafariView.swift */; };
-		A91F142E25E938F700651645 /* Onboarding5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F142D25E938F700651645 /* Onboarding5ViewController.swift */; };
-		A91F143325E93D6C00651645 /* Onboarding1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F143225E93D6C00651645 /* Onboarding1ViewController.swift */; };
+		A91F142E25E938F700651645 /* OnboardingLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F142D25E938F700651645 /* OnboardingLastViewController.swift */; };
+		A91F143325E93D6C00651645 /* OnboardingFirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F143225E93D6C00651645 /* OnboardingFirstViewController.swift */; };
 		A91F42BE25C830A800C2FCC2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91F42BD25C830A800C2FCC2 /* MainViewModel.swift */; };
 		A92A8B7325BB142100BA66FD /* TabsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92A8B7225BB142100BA66FD /* TabsViewModel.swift */; };
-		A936CD2825E90F2100522C7E /* seaerchbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A936CD2725E90F2100522C7E /* seaerchbutton.png */; };
+		A930CA422604C7FD00127114 /* searchbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = A930CA412604C7FD00127114 /* searchbutton.png */; };
+		A930CA4B2604CAF900127114 /* private-mode.png in Resources */ = {isa = PBXBuildFile; fileRef = A930CA4D2604CAF900127114 /* private-mode.png */; };
 		A936CD3325E914C700522C7E /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A936CD3525E914C700522C7E /* Onboarding.storyboard */; };
 		A936CD4025E9157100522C7E /* contextmenu.png in Resources */ = {isa = PBXBuildFile; fileRef = A936CD4225E9157100522C7E /* contextmenu.png */; };
 		A9401C2525C2D86000AEAF74 /* TabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9401C2425C2D86000AEAF74 /* TabCell.swift */; };
+		A9472BD92600E22500D37423 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A9472BD82600E22500D37423 /* Colors.xcassets */; };
 		A94C246925D54B6C00AC0E0A /* BookmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94C246825D54B6C00AC0E0A /* BookmarkViewModel.swift */; };
 		A9519BD625E93FCB00AAF25C /* launchicon.png in Resources */ = {isa = PBXBuildFile; fileRef = A9519BD525E93FCB00AAF25C /* launchicon.png */; };
 		A95E516325DBE45B00BD36EC /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95E516225DBE45B00BD36EC /* Settings.swift */; };
@@ -79,16 +81,19 @@
 		A9014E3525C1B37700866F3A /* Browser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Browser.swift; sourceTree = "<group>"; };
 		A91E73A625E7F73C00418F1E /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		A91E73B325E8030200418F1E /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
-		A91F142D25E938F700651645 /* Onboarding5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding5ViewController.swift; sourceTree = "<group>"; };
-		A91F143225E93D6C00651645 /* Onboarding1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding1ViewController.swift; sourceTree = "<group>"; };
+		A91F142D25E938F700651645 /* OnboardingLastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLastViewController.swift; sourceTree = "<group>"; };
+		A91F143225E93D6C00651645 /* OnboardingFirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingFirstViewController.swift; sourceTree = "<group>"; };
 		A91F42BD25C830A800C2FCC2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A92A8B7225BB142100BA66FD /* TabsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewModel.swift; sourceTree = "<group>"; };
-		A936CD2725E90F2100522C7E /* seaerchbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seaerchbutton.png; sourceTree = "<group>"; };
+		A930CA412604C7FD00127114 /* searchbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchbutton.png; sourceTree = "<group>"; };
+		A930CA4C2604CAF900127114 /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/private-mode.png"; sourceTree = "<group>"; };
+		A930CA512604CB0400127114 /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = "Base.lproj/private-mode.png"; sourceTree = "<group>"; };
 		A936CD3425E914C700522C7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboarding.storyboard; sourceTree = "<group>"; };
 		A936CD3A25E914CB00522C7E /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Onboarding.strings; sourceTree = "<group>"; };
 		A936CD4125E9157100522C7E /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = ja.lproj/contextmenu.png; sourceTree = "<group>"; };
 		A936CD4625E9157A00522C7E /* Base */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Base; path = Base.lproj/contextmenu.png; sourceTree = "<group>"; };
 		A9401C2425C2D86000AEAF74 /* TabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCell.swift; sourceTree = "<group>"; };
+		A9472BD82600E22500D37423 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		A94C246825D54B6C00AC0E0A /* BookmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkViewModel.swift; sourceTree = "<group>"; };
 		A9519BD525E93FCB00AAF25C /* launchicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launchicon.png; sourceTree = "<group>"; };
 		A95E516225DBE45B00BD36EC /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -181,8 +186,8 @@
 			isa = PBXGroup;
 			children = (
 				A91E73A625E7F73C00418F1E /* OnboardingViewController.swift */,
-				A91F143225E93D6C00651645 /* Onboarding1ViewController.swift */,
-				A91F142D25E938F700651645 /* Onboarding5ViewController.swift */,
+				A91F143225E93D6C00651645 /* OnboardingFirstViewController.swift */,
+				A91F142D25E938F700651645 /* OnboardingLastViewController.swift */,
 				A936CD3525E914C700522C7E /* Onboarding.storyboard */,
 			);
 			name = Onboarding;
@@ -211,10 +216,12 @@
 			isa = PBXGroup;
 			children = (
 				A984063A2598C909006B6F49 /* Assets.xcassets */,
+				A9472BD82600E22500D37423 /* Colors.xcassets */,
 				A9519BD525E93FCB00AAF25C /* launchicon.png */,
 				A9D7BE5C25E91DE200AB5D53 /* buttons_dark.png */,
 				A9D7BE5D25E91DE200AB5D53 /* buttons_light.png */,
-				A936CD2725E90F2100522C7E /* seaerchbutton.png */,
+				A930CA412604C7FD00127114 /* searchbutton.png */,
+				A930CA4D2604CAF900127114 /* private-mode.png */,
 				A9AB218325E92E8A001454CA /* closebutton.png */,
 				A936CD4225E9157100522C7E /* contextmenu.png */,
 			);
@@ -488,12 +495,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A930CA4B2604CAF900127114 /* private-mode.png in Resources */,
 				A98A10AA25E6864300431B6B /* Bookmark.storyboard in Resources */,
 				A9519BD625E93FCB00AAF25C /* launchicon.png in Resources */,
-				A936CD2825E90F2100522C7E /* seaerchbutton.png in Resources */,
+				A9472BD92600E22500D37423 /* Colors.xcassets in Resources */,
 				A98A10B925E6875C00431B6B /* LaunchScreen.storyboard in Resources */,
 				A984063B2598C909006B6F49 /* Assets.xcassets in Resources */,
 				A9AB218125E92E8A001454CA /* closebutton.png in Resources */,
+				A930CA422604C7FD00127114 /* searchbutton.png in Resources */,
 				A98406392598C908006B6F49 /* Main.storyboard in Resources */,
 				A98A10CE25E6892300431B6B /* Localizable.strings in Resources */,
 				A936CD3325E914C700522C7E /* Onboarding.storyboard in Resources */,
@@ -532,7 +541,7 @@
 				A9D014A025C52D8E00A59C9D /* ImageLoader.swift in Sources */,
 				A99B90DA25BAAD4C00554B1D /* TabsViewController.swift in Sources */,
 				A9DD2C5125CEFD2A000771ED /* String+URL.swift in Sources */,
-				A91F142E25E938F700651645 /* Onboarding5ViewController.swift in Sources */,
+				A91F142E25E938F700651645 /* OnboardingLastViewController.swift in Sources */,
 				A9D6440025DAC1920017D79D /* SearchEngineViewController.swift in Sources */,
 				A9401C2525C2D86000AEAF74 /* TabCell.swift in Sources */,
 				A98406362598C908006B6F49 /* BrowsersViewController.swift in Sources */,
@@ -541,7 +550,7 @@
 				A98406342598C908006B6F49 /* SceneDelegate.swift in Sources */,
 				A99DC45025CD731D0095FAD7 /* SearchBarViewModel.swift in Sources */,
 				A9A12D9925BAECAA008843FF /* Tab.swift in Sources */,
-				A91F143325E93D6C00651645 /* Onboarding1ViewController.swift in Sources */,
+				A91F143325E93D6C00651645 /* OnboardingFirstViewController.swift in Sources */,
 				A97F983125DEB83E007D978C /* CollectionType.swift in Sources */,
 				A973006725F66E9000C85C73 /* KeyboardBarViewController.swift in Sources */,
 				A98406652598CF1E006B6F49 /* WebViewController.swift in Sources */,
@@ -594,6 +603,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A930CA4D2604CAF900127114 /* private-mode.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A930CA4C2604CAF900127114 /* ja */,
+				A930CA512604CB0400127114 /* Base */,
+			);
+			name = "private-mode.png";
+			sourceTree = "<group>";
+		};
 		A936CD3525E914C700522C7E /* Onboarding.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -783,14 +801,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = UITabBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -804,14 +822,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 14;
+				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = UITabBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.UITabBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

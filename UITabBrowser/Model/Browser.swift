@@ -41,6 +41,7 @@ class Browser {
     var type: PageType
     var title = ""
     var pinned = false
+    var privateMode = false
     var loading = false
     var progress: Float = 0.0
     var canGoBack = false
@@ -70,11 +71,13 @@ class Browser {
         urlString: String? = nil,
         title: String = "",
         selected: Bool = false,
-        pinned: Bool = false
+        pinned: Bool = false,
+        privateMode: Bool = false
     ) {
         self.type = type
         self.selected = selected
         self.pinned = pinned
+        self.privateMode = privateMode
         self.title = title
         switch type {
         case .browser:
@@ -125,7 +128,10 @@ class Browser {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] url in
                 // Load contents
-                (self?.viewController as! WebViewController).load(url: url)
+                (self?.viewController as! WebViewController).load(
+                    url: url,
+                    privateMode: privateMode
+                )
                 // Set flag
                 self?.isContentLoaded = true
             }
@@ -144,7 +150,7 @@ class Browser {
         if let vc = self.viewController {
             switch vc {
             case is WebViewController:
-                (vc as! WebViewController).load(url: url)
+                (vc as! WebViewController).load(url: url, privateMode: privateMode)
             case is SearchResultsController:
                 // Replace with WebView
                 self.viewController.view.isHidden = true
@@ -154,7 +160,7 @@ class Browser {
                 self.url = url
                 let webVC = WebViewController()
                 webVC.delegate = self
-                webVC.load(url: url)
+                webVC.load(url: url, privateMode: privateMode)
                 self.viewController = webVC
             default:
                 fatalError(vc.debugDescription)
@@ -216,7 +222,7 @@ extension Browser: WebViewControllerDelegate {
     }
 
     func webViewController(_ viewController: WebViewController, openNewTab url: URL) {
-        Browsers.shared.insertBrowser(urlString: url.absoluteString)
+        Browsers.shared.insertBrowser(urlString: url.absoluteString, privateMode: privateMode)
     }
 
     func webViewController(_ viewController: WebViewController, didScroll offset: CGPoint) {
@@ -230,7 +236,9 @@ extension Browser: WebViewControllerDelegate {
 
     func webViewControllerDidFinishNavigation(_ viewController: WebViewController) {
         // Save history
-        if let webView = viewController.webView, let url = webView.url, let title = webView.title {
+        if !privateMode, let webView = viewController.webView, let url = webView.url,
+            let title = webView.title
+        {
             Items.shared.add(
                 type: .history,
                 title: title,

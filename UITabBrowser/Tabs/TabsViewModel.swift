@@ -40,7 +40,8 @@ class TabsViewModel: ObservableObject {
                             favicon: browser.favicon,
                             active: browser.selected,
                             loading: browser.loading,
-                            pinned: browser.pinned
+                            pinned: browser.pinned,
+                            privateMode: browser.privateMode
                         )
                     case .search:
                         return Tab(
@@ -51,7 +52,8 @@ class TabsViewModel: ObservableObject {
                             favicon: UIImage(systemName: "magnifyingglass"),
                             active: browser.selected,
                             loading: false,
-                            pinned: false
+                            pinned: false,
+                            privateMode: browser.privateMode
                         )
                     }
                 }
@@ -85,13 +87,17 @@ extension TabsViewModel {
         )
     }
 
-    func openNewTab(url: URL) {
-        browsers.insertBrowser(urlString: url.absoluteString)
+    func openNewTab(url: URL, privateMode: Bool = false) {
+        browsers.insertBrowser(urlString: url.absoluteString, privateMode: privateMode)
     }
 
     func setPin(id: BrowserID, pinned: Bool) {
         if let browser = tabs.find(where: { $0.id == id }) {
             browsers.setPin(id: browser.id, pinned: pinned)
         }
+    }
+
+    func setPrivateMode(id: BrowserID, mode: Bool = true) {
+        browsers.setPrivateMode(id: id, mode: mode)
     }
 }
