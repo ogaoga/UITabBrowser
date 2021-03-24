@@ -35,11 +35,7 @@ class MainViewController: UIViewController {
     // MARK: - Actions
 
     @IBAction func showSearch(_ sender: Any) {
-        if viewModel.isSearchView {
-            searchBar.becomeFirstResponder()
-        } else {
-            viewModel.showSearch()
-        }
+        self.showSearch(privateMode: false)
     }
 
     @IBAction func goBack(_ sender: Any) {
@@ -140,6 +136,19 @@ class MainViewController: UIViewController {
 // MARK: - Close menu
 
 extension MainViewController {
+
+    private func showSearch(privateMode: Bool) {
+        if viewModel.isSearchView {
+            let sharedBrowsers = Browsers.shared
+            if let id = sharedBrowsers.currentBrowser?.id {
+                sharedBrowsers.setPrivateMode(id: id, mode: privateMode)
+            }
+            searchBar.becomeFirstResponder()
+        } else {
+            viewModel.showSearch(privateMode: privateMode)
+        }
+    }
+
     func configureCloseMenu() {
         let actions = [
             UIAction(
@@ -151,6 +160,20 @@ extension MainViewController {
                 state: .off,
                 handler: { _ in
                     self.viewModel.close()
+                }
+            ),
+            UIAction(
+                title: NSLocalizedString(
+                    "Close All Private Tabs",
+                    comment: "in Context Menu of Close button"
+                ),
+                image: UIImage(systemName: "xmark.shield.fill"),
+                identifier: nil,
+                discoverabilityTitle: nil,
+                attributes: [],
+                state: .off,
+                handler: { action in
+                    self.viewModel.closeAllPrivateTabs()
                 }
             ),
             UIAction(
@@ -184,7 +207,21 @@ extension MainViewController {
                 attributes: [],
                 state: .off,
                 handler: { _ in
-                    self.showSearch(self)
+                    self.showSearch(privateMode: false)
+                }
+            ),
+            UIAction(
+                title: NSLocalizedString(
+                    "Private Search",
+                    comment: "in Context Menu of Search button"
+                ),
+                image: UIImage(systemName: "shield.lefthalf.fill"),
+                identifier: nil,
+                discoverabilityTitle: nil,
+                attributes: [],
+                state: .off,
+                handler: { _ in
+                    self.showSearch(privateMode: true)
                 }
             ),
             UIAction(

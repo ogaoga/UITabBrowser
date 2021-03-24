@@ -54,11 +54,14 @@ class WebViewController: UIViewController {
     var webView: WKWebView! = nil
     weak var delegate: WebViewControllerDelegate?
 
-    func load(url: URL) {
+    func load(url: URL, privateMode: Bool = false) {
 
         // instance
         if webView == nil {
             let config = WKWebViewConfiguration()
+            if privateMode {
+                config.websiteDataStore = .nonPersistent()
+            }
             webView = WKWebView(frame: .zero, configuration: config)
             webView.uiDelegate = self
             webView.navigationDelegate = self

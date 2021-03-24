@@ -96,10 +96,10 @@
             </objects>
             <point key="canvasLocation" x="103" y="135"/>
         </scene>
-        <!--Onboarding1 View Controller-->
+        <!--Onboarding First View Controller-->
         <scene sceneID="48M-uV-S6P">
             <objects>
-                <viewController storyboardIdentifier="View1" id="PwC-kL-Dvs" customClass="Onboarding1ViewController" customModule="UITabBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="View1" id="PwC-kL-Dvs" customClass="OnboardingFirstViewController" customModule="UITabBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iUB-sh-lxP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -166,7 +166,7 @@ VGFwIHRoZSBtYWduaWZpZXIgYnV0dG9uERERERENaWYgeW91IHdhbnQgdG8gc2VhcmNoA
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="seaerchbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="pM6-mr-VSr">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="searchbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="pM6-mr-VSr">
                                 <rect key="frame" x="37.666666666666657" y="296" width="300" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="160" id="7yT-8y-VH9"/>
@@ -204,7 +204,7 @@ VGFwIHRoZSBtYWduaWZpZXIgYnV0dG9uERERERENaWYgeW91IHdhbnQgdG8gc2VhcmNoA
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Long-tap on the tab to show context menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pc5-Az-nYQ">
-                                <rect key="frame" x="25.666666666666657" y="529" width="324" height="21"/>
+                                <rect key="frame" x="25.666666666666657" y="521" width="324" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -215,14 +215,14 @@ VGFwIHRoZSBtYWduaWZpZXIgYnV0dG9uERERERENaWYgeW91IHdhbnQgdG8gc2VhcmNoA
                         <constraints>
                             <constraint firstItem="Y8b-Y1-tLW" firstAttribute="centerX" secondItem="ZdU-ZU-DhX" secondAttribute="centerX" id="X0o-tK-QOM"/>
                             <constraint firstItem="Pc5-Az-nYQ" firstAttribute="centerX" secondItem="ZdU-ZU-DhX" secondAttribute="centerX" id="Xd8-9l-Aaa"/>
-                            <constraint firstItem="Pc5-Az-nYQ" firstAttribute="top" secondItem="Y8b-Y1-tLW" secondAttribute="bottom" constant="8" id="ZD7-Eo-hWG"/>
+                            <constraint firstItem="Pc5-Az-nYQ" firstAttribute="top" secondItem="Y8b-Y1-tLW" secondAttribute="bottom" id="ZD7-Eo-hWG"/>
                             <constraint firstItem="Y8b-Y1-tLW" firstAttribute="centerY" secondItem="ZdU-ZU-DhX" secondAttribute="centerY" constant="-30" id="yak-fb-zyp"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wEy-ux-QVu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1218" y="825"/>
+            <point key="canvasLocation" x="1985" y="825"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="EuV-tA-wKZ">
@@ -233,10 +233,10 @@ VGFwIHRoZSBtYWduaWZpZXIgYnV0dG9uERERERENaWYgeW91IHdhbnQgdG8gc2VhcmNoA
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7T-Jf-aGu">
-                                <rect key="frame" x="77.000000000000014" y="456" width="221.33333333333337" height="40.666666666666686"/>
+                                <rect key="frame" x="69" y="456" width="237" height="40.666666666666686"/>
                                 <string key="text" base64-UTF8="YES">
 TG9uZy10YXAgb24gdGhlIGNsb3NlIGJ1dHRvbhERERERERHigKggEREREREREREREREREREREXRvIGNs
-b3NlIGFsbCB0YWJzA
+b3NlIGFsbCB0YWJzIG9yIHByaXZhdGUgdGFicw
 </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -262,12 +262,12 @@ b3NlIGFsbCB0YWJzA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TtL-YQ-hfc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574" y="825"/>
+            <point key="canvasLocation" x="1303" y="825"/>
         </scene>
-        <!--Onboarding5 View Controller-->
+        <!--Onboarding Last View Controller-->
         <scene sceneID="OYI-jx-EiT">
             <objects>
-                <viewController storyboardIdentifier="View5" id="ENB-Bd-c0N" customClass="Onboarding5ViewController" customModule="UITabBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="View5" id="ENB-Bd-c0N" customClass="OnboardingLastViewController" customModule="UITabBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r4b-le-y6f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -303,14 +303,54 @@ b3NlIGFsbCB0YWJzA
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v5d-nc-51i" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1872.8" y="824.6305418719212"/>
+            <point key="canvasLocation" x="2641" y="825"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ko3-cV-phs">
+            <objects>
+                <viewController storyboardIdentifier="ViewPrivateBrowse" id="2Uh-Yo-d12" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P5w-ez-w1S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="private-mode.png" translatesAutoresizingMaskIntoConstraints="NO" id="GbK-Sb-35c">
+                                <rect key="frame" x="37.666666666666657" y="296" width="300" height="160"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="160" id="U9r-WA-VZF"/>
+                                    <constraint firstAttribute="width" constant="300" id="eWe-Ew-wHb"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGp-Nq-9dG">
+                                <rect key="frame" x="61.333333333333329" y="456" width="252.33333333333337" height="40.666666666666686"/>
+                                <string key="text" base64-UTF8="YES">
+TG9uZy10YXAgb24gdGhlIG1hZ25pZmllciBidXR0b24RERENdG8gc3RhcnQgcHJpdmF0ZSBicm93c2U
+</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="erl-NR-X59"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FGp-Nq-9dG" firstAttribute="centerX" secondItem="P5w-ez-w1S" secondAttribute="centerX" id="Riw-9G-7XE"/>
+                            <constraint firstItem="GbK-Sb-35c" firstAttribute="centerX" secondItem="P5w-ez-w1S" secondAttribute="centerX" id="Vn4-oq-wPX"/>
+                            <constraint firstItem="GbK-Sb-35c" firstAttribute="centerY" secondItem="P5w-ez-w1S" secondAttribute="centerY" constant="-30" id="Xly-yb-5OB"/>
+                            <constraint firstItem="FGp-Nq-9dG" firstAttribute="top" secondItem="GbK-Sb-35c" secondAttribute="bottom" id="wJl-wt-G0I"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WBc-rs-LUu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="605.60000000000002" y="824.6305418719212"/>
         </scene>
     </scenes>
     <resources>
-        <image name="closebutton.png" width="568" height="315"/>
-        <image name="contextmenu.png" width="568" height="669.5"/>
+        <image name="closebutton.png" width="595" height="357"/>
+        <image name="contextmenu.png" width="595" height="675"/>
         <image name="launchicon.png" width="2048" height="2048"/>
-        <image name="seaerchbutton.png" width="568" height="280.5"/>
+        <image name="private-mode.png" width="595" height="357"/>
+        <image name="searchbutton.png" width="595" height="311"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

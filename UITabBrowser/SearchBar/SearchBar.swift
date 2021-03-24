@@ -10,6 +10,8 @@ import UIKit
 
 class SearchBar: UISearchBar {
 
+    typealias IconType = SearchBarViewModel.IconType
+
     private let viewModel = SearchBarViewModel()
     private var cancellables: Set<AnyCancellable> = []
 
@@ -43,38 +45,23 @@ class SearchBar: UISearchBar {
             .store(in: &cancellables)
 
         // Icon
-        viewModel.$url
-            .dropFirst()
-            .receive(on: DispatchQueue.main)
-            .compactMap { $0?.absoluteString }
-            .sink { urlString in
-                self.setImage(
-                    UIImage(
-                        systemName: urlString.isSecureURL ? "lock.fill" : "lock.slash"
-                    ),
-                    for: .search,
-                    state: .normal
-                )
-            }
-            .store(in: &cancellables)
-        viewModel.$isSearch
+        viewModel.$iconType
+            .removeDuplicates()
             .combineLatest($editing)
-            .dropFirst()
+            .combineLatest(viewModel.$privateMode)
             .receive(on: DispatchQueue.main)
-            .map { (isSearch, editing) -> String in
-                if isSearch || editing {
-                    return "magnifyingglass"
-                } else {
-                    if let isSecureURL = self.text?.isSecureURL, isSecureURL {
-                        return "lock.fill"
-                    } else {
-                        return "lock.slash"
-                    }
-                }
-            }
-            .sink { name in
+            .sink {
+                let (iconType, editing) = $0
+                let privateMode = $1
                 self.setImage(
-                    UIImage(systemName: name),
+                    UIImage(systemName: editing ? IconType.Magnifyingglass.name : iconType.name)!
+                        .withTintColor(
+                            UIColor(
+                                named: privateMode
+                                    ? "SearchBarTextPrivateMode" : "SearchBarTextNormalMode"
+                            )!,
+                            renderingMode: .alwaysOriginal
+                        ),
                     for: .search,
                     state: .normal
                 )
@@ -100,12 +87,25 @@ class SearchBar: UISearchBar {
         // Set keywords form others
         viewModel.$keywords
             .dropFirst()
-            .receive(on: DispatchQueue.main)
             .compactMap { $0 }
+            .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] text in
                 self?.text = text
                 self?.becomeFirstResponder()
             })
+            .store(in: &cancellables)
+
+        viewModel.$privateMode
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] privateMode in
+                self?.searchTextField.backgroundColor = UIColor(
+                    named: privateMode
+                        ? "SearchBarBackgroundPrivateMode" : "SearchBarBackgroundNormalMode"
+                )
+                self?.searchTextField.textColor = UIColor(
+                    named: privateMode ? "SearchBarTextPrivateMode" : "SearchBarTextNormalMode"
+                )
+            }
             .store(in: &cancellables)
     }
 

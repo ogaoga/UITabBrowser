@@ -84,16 +84,18 @@ final class Settings {
                 .enumerated()
                 .forEach {
                     let browser = $0.element
-                    items.add(
-                        type: .tab,
-                        title: browser.title,
-                        url: browser.url!,
-                        keywords: "",
-                        browserId: browser.id,
-                        selected: browser.selected,
-                        pinned: browser.pinned,
-                        order: $0.offset
-                    )
+                    if !browser.privateMode {
+                        items.add(
+                            type: .tab,
+                            title: browser.title,
+                            url: browser.url!,
+                            keywords: "",
+                            browserId: browser.id,
+                            selected: browser.selected,
+                            pinned: browser.pinned,
+                            order: $0.offset
+                        )
+                    }
                 }
         }
     }

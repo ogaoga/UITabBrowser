@@ -99,12 +99,19 @@ class MainViewModel: NSObject, ObservableObject {
         }
     }
 
+    // Close all tabs
     func closeAll() {
         browsers.deleteAll()
     }
 
-    func showSearch() {
-        browsers.showSearch()
+    // Close all private tabs
+    func closeAllPrivateTabs() {
+        browsers.deleteAllPrivate()
+    }
+
+    // Show search with private flag
+    func showSearch(privateMode: Bool = false) {
+        browsers.showSearch(privateMode: privateMode)
     }
 
     func searchFromClipboard() {

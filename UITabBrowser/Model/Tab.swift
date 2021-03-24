@@ -7,7 +7,6 @@
 
 import UIKit
 
-// TODO: Consider if it should have reference of browser
 struct Tab: Hashable {
     let id: BrowserID
     var type: PageType
@@ -17,4 +16,5 @@ struct Tab: Hashable {
     var active: Bool
     var loading: Bool
     var pinned: Bool
+    var privateMode: Bool
 }

@@ -105,15 +105,16 @@ final class Browsers: NSObject, ObservableObject {
         updateCurrentBrowser()
     }
 
-    func appendSearch() {
+    func appendSearch(privateMode: Bool = false) {
         let browser = Browser(type: .search)
         browser.delegate = self
+        browser.privateMode = privateMode
         browsers.append(browser)
         selectLast()
     }
 
-    func insertBrowser(urlString: String) {
-        let browser = Browser(type: .browser, urlString: urlString)
+    func insertBrowser(urlString: String, privateMode: Bool = false) {
+        let browser = Browser(type: .browser, urlString: urlString, privateMode: privateMode)
         browser.delegate = self
         browsers.insert(browser, at: selectedIndex + 1)
         select(index: selectedIndex + 1)
@@ -169,6 +170,33 @@ final class Browsers: NSObject, ObservableObject {
         }
     }
 
+    func deleteAllPrivate() {
+        // Save current browser to keep it as much as possible
+        let currentId = browsers.find(where: { $0.selected })?.id
+        // Filter
+        browsers = browsers.filter { !$0.privateMode }
+        // Show search view if no browser exists
+        if browsers.count == 0 {
+            appendSearch()
+        }
+        // Select tab
+        if let newBrowser = browsers.find(
+            where: {
+                currentId != nil && $0.id == currentId
+            }
+        ) {
+            select(id: newBrowser.id)
+        } else {
+            selectLast()
+        }
+    }
+
+    /*
+    func hasPrivate() -> Bool {
+        return browsers.firstIndex { $0.privateMode } != nil
+    }
+     */
+
     func getSearchViewID() -> BrowserID? {
         if let index = browsers.firstIndex(where: { $0.type == .search }) {
             return browsers[index].id
@@ -177,13 +205,14 @@ final class Browsers: NSObject, ObservableObject {
         }
     }
 
-    func showSearch() {
+    func showSearch(privateMode: Bool = false) {
         if let id = getSearchViewID() {
             // move to search
             select(id: id)
+            setPrivateMode(id: id, mode: privateMode)
         } else {
             // Add search
-            appendSearch()
+            appendSearch(privateMode: privateMode)
         }
     }
 
@@ -224,6 +253,17 @@ final class Browsers: NSObject, ObservableObject {
                 select(id: browser.id)
             }
         }
+    }
+
+    // private mode
+    func setPrivateMode(id: BrowserID, mode: Bool = true) {
+        browsers = browsers.map({ browser in
+            if browser.id == id {
+                browser.privateMode = mode
+            }
+            return browser
+        })
+        updateCurrentBrowser()
     }
 
     func get(id: BrowserID) -> Browser? {
